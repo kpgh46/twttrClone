@@ -5,13 +5,13 @@ const { createTweet, getTweets } = require("../controller/tweetController");
 // const newTweet = require("../constructors/newTweet");
 
 //get all tweets
-router.get("/", getTweets);
+router.get("/api/tweets", getTweets);
 
 //get a single tweet
 //
 
 //create a new tweet
-router.post("/", createTweet);
+router.post("/api/tweets", createTweet);
 
 //delete a tweet
 //
