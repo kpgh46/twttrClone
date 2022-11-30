@@ -8,7 +8,10 @@ let Home = () => {
 		let getTweets = async () => {
 			let response = await fetch("api/tweets");
 			let json = await response.json();
-			setTweets(json);
+
+			if (response.ok) {
+				setTweets(json);
+			}
 		};
 
 		getTweets();
@@ -18,7 +21,11 @@ let Home = () => {
 		<div>
 			<h1>This is the home page</h1>
 			{tweets &&
-				tweets.map((tweet) => <p key={tweet._id}>{tweet.author}</p>)}
+				tweets.map((tweet) => (
+					<p key={tweet._id}>
+						{tweet.author} - {tweet.caption}
+					</p>
+				))}
 		</div>
 	);
 };
