@@ -1,5 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import TweetForm from "../components/form";
 
 let Home = () => {
 	let [tweets, setTweets] = useState(null);
@@ -20,6 +21,7 @@ let Home = () => {
 	return (
 		<div>
 			<h1>This is the home page</h1>
+			<TweetForm />
 			{tweets &&
 				tweets.map((tweet) => (
 					<p key={tweet._id}>

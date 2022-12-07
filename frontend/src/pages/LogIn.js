@@ -1,18 +1,18 @@
 import React from "react";
 import { useState } from "react";
-// import { json } from "react-router-dom";
+import { json } from "react-router-dom";
 
-const SignUp = () => {
+const LogIn = () => {
 	let [username, setUserName] = useState("");
 	let [password, setPassword] = useState("");
 	let [error, setError] = useState(null);
 
-	const clickSubmit = async (e) => {
+	const clickLogIn = async (e) => {
 		e.preventDefault();
 
 		const user = { username, password };
 
-		const response = await fetch("api/signup", {
+		const response = await fetch("api/login", {
 			method: "POST",
 			body: JSON.stringify(user),
 			headers: {
@@ -26,14 +26,14 @@ const SignUp = () => {
 			setError(json.error);
 		}
 		if (response.ok) {
-			setError(json);
+			console.log("newworkout added", json);
 		}
 	};
 
 	return (
 		<div>
-			<div>Please Sign Up</div>
-			<form onSubmit={clickSubmit}>
+			<div>Please Log In</div>
+			<form onSubmit={clickLogIn}>
 				<label>Username</label>
 				<input
 					name="username"
@@ -49,11 +49,10 @@ const SignUp = () => {
 						setPassword(e.target.value);
 					}}
 				/>
-				<button>Sign Up</button>
+				<button>Log In</button>
 			</form>
-			{error && <div>{error.mssg}</div>}
 		</div>
 	);
 };
 
-export default SignUp;
+export default LogIn;
