@@ -1,27 +1,15 @@
 import React from "react";
+import { useContext } from "react";
+import { TweetContext } from "../context/tweetContext";
 
 const TweetForm = () => {
 	const [caption, setCaption] = React.useState("");
 	const [author, setAuthor] = React.useState("");
-
-	const clickSubmit = async () => {
-		const response = await fetch("/api/tweets", {
-			method: "POST",
-			body: JSON.stringify({ caption, author }),
-			headers: {
-				"Content-Type": "application/json",
-			},
-		});
-		const json = await response;
-
-		if (response.ok) {
-			console.log(json);
-		}
-	};
+	const { addTweet } = useContext(TweetContext);
 
 	return (
 		<div>
-			<form onClick={clickSubmit}>
+			<form onClick={() => addTweet(caption, author)}>
 				<label>Caption</label>
 				<input
 					type="text"

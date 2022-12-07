@@ -1,22 +1,15 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useEffect, useContext } from "react";
 import TweetForm from "../components/form";
+import { TweetContext } from "../context/tweetContext";
 
 let Home = () => {
-	let [tweets, setTweets] = useState(null);
+	const { tweets, getTweets } = useContext(TweetContext);
 
 	useEffect(() => {
-		let getTweets = async () => {
-			let response = await fetch("api/tweets");
-			let json = await response.json();
-
-			if (response.ok) {
-				setTweets(json);
-			}
-		};
-
 		getTweets();
 	}, []);
+	// console.log(tweets);
 
 	return (
 		<div>
