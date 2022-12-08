@@ -15,6 +15,7 @@ const TweetContextProvider = (props) => {
 		}
 	};
 
+	//will add more parameters here and CreateTweet component
 	let addTweet = async (caption) => {
 		const response = await fetch("/api/tweets", {
 			method: "POST",

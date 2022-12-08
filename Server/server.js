@@ -3,7 +3,7 @@ require("dotenv").config();
 const express = require("express");
 const app = express();
 const tweetRoutes = require("./routes/tweets");
-const userRoutes = require("./routes/signUp");
+const userRoutes = require("./routes/auth");
 const mongoose = require("mongoose");
 const path = require("path");
 const session = require("express-session");
