@@ -15,10 +15,10 @@ const TweetContextProvider = (props) => {
 		}
 	};
 
-	let addTweet = async (caption, author) => {
+	let addTweet = async (caption) => {
 		const response = await fetch("/api/tweets", {
 			method: "POST",
-			body: JSON.stringify({ caption, author }),
+			body: JSON.stringify({ caption }),
 			headers: {
 				"Content-Type": "application/json",
 			},
