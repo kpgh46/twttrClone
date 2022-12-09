@@ -1,5 +1,5 @@
 import React from "react";
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 
 export const authContext = createContext();
 
@@ -13,6 +13,14 @@ const AuthContextProvider = (props) => {
 	const removeUser = () => {
 		setLoggedInUser(null);
 	};
+
+	useEffect(() => {
+		const user = JSON.parse(localStorage.getItem("user"));
+
+		if (user) {
+			setUser(user.newUser);
+		}
+	}, []);
 
 	console.log("From Context:", loggedInUser);
 

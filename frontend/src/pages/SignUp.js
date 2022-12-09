@@ -1,6 +1,7 @@
 import React from "react";
 import { useState, useContext } from "react";
 import { authContext } from "../context/authContext";
+import Navbar from "../components/Navbar";
 
 const SignUp = () => {
 	let [username, setUserName] = useState("");
@@ -29,13 +30,14 @@ const SignUp = () => {
 		}
 		if (response.ok) {
 			localStorage.setItem("user", JSON.stringify(json));
-			setUser(json);
+			setUser(json.newUser);
 			console.log("from SignUp", loggedInUser);
 		}
 	};
 
 	return (
 		<div>
+			<Navbar />
 			<div>Please Sign Up</div>
 			<form onSubmit={clickSubmit}>
 				<label>Username</label>
