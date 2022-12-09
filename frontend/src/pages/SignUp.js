@@ -1,11 +1,12 @@
 import React from "react";
-import { useState } from "react";
-// import { json } from "react-router-dom";
+import { useState, useContext } from "react";
+import { authContext } from "../context/authContext";
 
 const SignUp = () => {
 	let [username, setUserName] = useState("");
 	let [password, setPassword] = useState("");
 	let [error, setError] = useState(null);
+	let { loggedInUser, setLoggedInUser, setUser } = useContext(authContext);
 
 	const clickSubmit = async (e) => {
 		e.preventDefault();
@@ -23,10 +24,12 @@ const SignUp = () => {
 		const json = await response.json();
 
 		if (!response.ok) {
-			setError(json.error);
+			setError(json);
 		}
 		if (response.ok) {
-			setError(json);
+			// localStorage.setItem("user", JSON.stringify(json));
+			setUser(json.newUser);
+			console.log(json);
 		}
 	};
 
@@ -51,7 +54,8 @@ const SignUp = () => {
 				/>
 				<button>Sign Up</button>
 			</form>
-			{error && <div>{error.mssg}</div>}
+			{error && <div>{error.message}</div>}
+			{loggedInUser && <div>{loggedInUser.username}</div>}
 		</div>
 	);
 };

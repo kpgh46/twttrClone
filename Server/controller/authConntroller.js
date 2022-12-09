@@ -6,7 +6,7 @@ const jwt = require("jsonwebtoken");
 
 //web token
 const createToken = (_id) => {
-	jwt.sign({ _id }, process.env.SECRET, { expiresIn: "3d" });
+	return jwt.sign({ _id }, process.env.SECRET, { expiresIn: "3d" });
 };
 
 //sign up
@@ -17,7 +17,7 @@ const signUp = async (req, res) => {
 	const exists = await User.findOne({ username });
 
 	if (exists) {
-		res.status(200).json({ message: "user already exists" });
+		return res.status(400).json({ message: "user already exists" });
 	}
 
 	//try to create the user in database
@@ -29,8 +29,8 @@ const signUp = async (req, res) => {
 			username,
 			password: hashedPassword,
 		});
-		const token = createToken(newUser._id);
-		res.status(200).json(newUser);
+		const token = await createToken(newUser._id);
+		res.status(200).json({ newUser, token });
 	} catch (error) {
 		res.status(400).json({ error: error.message });
 	}
