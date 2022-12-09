@@ -10,7 +10,6 @@ const TweetCard = () => {
 	useEffect(() => {
 		getTweets();
 	}, []);
-	console.log(tweets);
 
 	return (
 		<div>

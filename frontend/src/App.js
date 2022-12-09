@@ -8,6 +8,7 @@ import SignUp from "./pages/SignUp";
 import LogIn from "./pages/LogIn";
 
 function App() {
+	console.log("hi, from Appjs");
 	return (
 		<div className="App">
 			<AuthContextProvider>

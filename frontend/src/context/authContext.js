@@ -10,9 +10,15 @@ const AuthContextProvider = (props) => {
 		setLoggedInUser(user);
 	};
 
+	const removeUser = () => {
+		setLoggedInUser(null);
+	};
+
+	console.log("From Context:", loggedInUser);
+
 	return (
 		<authContext.Provider
-			value={{ loggedInUser, setLoggedInUser, setUser }}
+			value={{ loggedInUser, setLoggedInUser, setUser, removeUser }}
 		>
 			{props.children}
 		</authContext.Provider>

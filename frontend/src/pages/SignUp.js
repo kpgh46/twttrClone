@@ -6,10 +6,11 @@ const SignUp = () => {
 	let [username, setUserName] = useState("");
 	let [password, setPassword] = useState("");
 	let [error, setError] = useState(null);
-	let { loggedInUser, setLoggedInUser, setUser } = useContext(authContext);
+	let { loggedInUser, setUser } = useContext(authContext);
 
 	const clickSubmit = async (e) => {
 		e.preventDefault();
+		setError(null);
 
 		const user = { username, password };
 
@@ -27,9 +28,9 @@ const SignUp = () => {
 			setError(json);
 		}
 		if (response.ok) {
-			// localStorage.setItem("user", JSON.stringify(json));
-			setUser(json.newUser);
-			console.log(json);
+			localStorage.setItem("user", JSON.stringify(json));
+			setUser(json);
+			console.log("from SignUp", loggedInUser);
 		}
 	};
 
