@@ -1,8 +1,11 @@
 const express = require("express");
 const router = express.Router();
 const { createTweet, getTweets } = require("../controller/tweetController");
+const requireAuth = require("../middleware/requireAuth");
 
 // const newTweet = require("../constructors/newTweet");
+
+router.use(requireAuth);
 
 //get all tweets
 router.get("/api/tweets", getTweets);

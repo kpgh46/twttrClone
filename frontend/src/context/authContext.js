@@ -18,7 +18,7 @@ const AuthContextProvider = (props) => {
 		const user = JSON.parse(localStorage.getItem("user"));
 
 		if (user) {
-			setUser(user.newUser);
+			setUser(user);
 		}
 	}, []);
 

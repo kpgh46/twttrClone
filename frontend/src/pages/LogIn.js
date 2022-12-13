@@ -1,11 +1,13 @@
 import React from "react";
-import { useState } from "react";
-import { json } from "react-router-dom";
+import { useState, useContext } from "react";
+import { authContext } from "../context/authContext";
+import Navbar from "../components/Navbar";
 
 const LogIn = () => {
 	let [username, setUserName] = useState("");
 	let [password, setPassword] = useState("");
 	let [error, setError] = useState(null);
+	let { loggedInUser, setUser } = useContext(authContext);
 
 	const clickLogIn = async (e) => {
 		e.preventDefault();
@@ -23,15 +25,18 @@ const LogIn = () => {
 		const json = await response.json();
 
 		if (!response.ok) {
-			setError(json.error);
+			setError(json);
 		}
 		if (response.ok) {
-			console.log("newworkout added", json);
+			localStorage.setItem("user", JSON.stringify(json));
+			setUser(json);
+			console.log("We should be logged in", loggedInUser);
 		}
 	};
 
 	return (
 		<div>
+			<Navbar />
 			<div>Please Log In</div>
 			<form onSubmit={clickLogIn}>
 				<label>Username</label>
@@ -50,6 +55,8 @@ const LogIn = () => {
 					}}
 				/>
 				<button>Log In</button>
+				{error && <div>{error.message}</div>}
+				{loggedInUser && <div>{loggedInUser.user.username}</div>}
 			</form>
 		</div>
 	);

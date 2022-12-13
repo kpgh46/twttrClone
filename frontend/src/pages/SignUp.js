@@ -13,8 +13,10 @@ const SignUp = () => {
 		e.preventDefault();
 		setError(null);
 
+		//create object for username and password
 		const user = { username, password };
 
+		//post request to api/signup.  sends stringified JSON
 		const response = await fetch("api/signup", {
 			method: "POST",
 			body: JSON.stringify(user),
@@ -28,9 +30,10 @@ const SignUp = () => {
 		if (!response.ok) {
 			setError(json);
 		}
+
 		if (response.ok) {
 			localStorage.setItem("user", JSON.stringify(json));
-			setUser(json.newUser);
+			setUser(json);
 			console.log("from SignUp", loggedInUser);
 		}
 	};
@@ -57,8 +60,8 @@ const SignUp = () => {
 				/>
 				<button>Sign Up</button>
 			</form>
-			{error && <div>{error.message}</div>}
-			{loggedInUser && <div>{loggedInUser.username}</div>}
+			{error && <div>{error.error}</div>}
+			{loggedInUser && <div>{loggedInUser.user.username}</div>}
 		</div>
 	);
 };

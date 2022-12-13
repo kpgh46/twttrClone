@@ -17,7 +17,7 @@ const signUp = async (req, res) => {
 	const exists = await User.findOne({ username });
 
 	if (exists) {
-		return res.status(400).json({ message: "user already exists" });
+		return res.status(400).json({ error: `user already exists ${exists}` });
 	}
 
 	//try to create the user in database
@@ -25,15 +25,36 @@ const signUp = async (req, res) => {
 		const salt = await bcrypt.genSalt(10);
 		const hashedPassword = await bcrypt.hash(password, salt);
 
-		const newUser = await User.create({
+		const user = await User.create({
 			username,
 			password: hashedPassword,
 		});
-		const token = await createToken(newUser._id);
-		res.status(200).json({ newUser, token });
+		const token = await createToken(user._id);
+		res.status(200).json({ user, token });
 	} catch (error) {
 		res.status(400).json({ error: error.message });
 	}
 };
 
-module.exports = signUp;
+const logIn = async (req, res) => {
+	const { username, password } = req.body;
+
+	//check if username already exists in database
+	const user = await User.findOne({ username });
+
+	if (!user) {
+		res.status(401).json({ error: "wrong username" });
+	}
+
+	const match = bcrypt.compare(password, user.password);
+	if (match) {
+		try {
+			const token = await createToken(user._id);
+			res.status(200).json({ user, token });
+		} catch (error) {
+			return res.status(400).json({ error: error.message });
+		}
+	}
+};
+
+module.exports = { signUp, logIn };

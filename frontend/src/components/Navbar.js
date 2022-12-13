@@ -9,7 +9,7 @@ const Navbar = () => {
 	const logout = () => {
 		localStorage.removeItem("user");
 		removeUser();
-		console.log(loggedInUser);
+		console.log("from navbar", loggedInUser);
 	};
 	return (
 		<div>
@@ -21,7 +21,7 @@ const Navbar = () => {
 			)}
 			{loggedInUser && (
 				<div>
-					{loggedInUser.username}
+					{loggedInUser.user.username}
 					<button onClick={logout}>LogOut</button>
 				</div>
 			)}
