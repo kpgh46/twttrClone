@@ -1,27 +1,40 @@
 import "./App.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import TweetContextProvider from "./context/tweetContext";
-import AuthContextProvider from "./context/authContext";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+
+import { authContext } from "./context/authContext";
+import { useContext } from "react";
 
 import Home from "./pages/Home";
 import SignUp from "./pages/SignUp";
 import LogIn from "./pages/LogIn";
 
 function App() {
-	console.log("hi, from Appjs");
+	const { loggedInUser } = useContext(authContext);
+	console.log("from app.js", loggedInUser);
 	return (
 		<div className="App">
-			<AuthContextProvider>
-				<TweetContextProvider>
-					<BrowserRouter>
-						<Routes>
-							<Route path="/" element={<Home />}></Route>
-							<Route path="/signup" element={<SignUp />}></Route>
-							<Route path="/login" element={<LogIn />}></Route>
-						</Routes>
-					</BrowserRouter>
-				</TweetContextProvider>
-			</AuthContextProvider>
+			<BrowserRouter>
+				<Routes>
+					<Route
+						path="/"
+						element={
+							loggedInUser ? <Home /> : <Navigate to="/login" />
+						}
+					></Route>
+					<Route
+						path="/signup"
+						element={
+							!loggedInUser ? <SignUp /> : <Navigate to="/" />
+						}
+					></Route>
+					<Route
+						path="/login"
+						element={
+							!loggedInUser ? <LogIn /> : <Navigate to="/" />
+						}
+					></Route>
+				</Routes>
+			</BrowserRouter>
 		</div>
 	);
 }
