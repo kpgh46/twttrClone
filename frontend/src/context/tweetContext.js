@@ -1,10 +1,12 @@
 import React from "react";
-import { createContext, useState } from "react";
+import { createContext, useState, useContext } from "react";
+import { authContext } from "./authContext";
 
 export const TweetContext = createContext();
 
 const TweetContextProvider = (props) => {
 	const [tweets, setTweets] = useState([]);
+	const { loggedInUser } = useContext(authContext);
 
 	let getTweets = async (token) => {
 		let response = await fetch("api/tweets", {
@@ -26,7 +28,7 @@ const TweetContextProvider = (props) => {
 			body: JSON.stringify({ caption }),
 			headers: {
 				"Content-Type": "application/json",
-				// Authorization: `Bearer ${loggedInUser.token}`,
+				Authorization: `Bearer ${loggedInUser.token}`,
 			},
 		});
 		const json = await response;
@@ -36,11 +38,15 @@ const TweetContextProvider = (props) => {
 		}
 	};
 
+	const resetTweets = () => {
+		setTweets(null);
+	};
+
 	//delete tweet
 
 	return (
 		<TweetContext.Provider
-			value={{ tweets, addTweet, setTweets, getTweets }}
+			value={{ tweets, addTweet, setTweets, getTweets, resetTweets }}
 		>
 			{props.children}
 		</TweetContext.Provider>

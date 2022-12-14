@@ -2,14 +2,16 @@ import React from "react";
 
 import { useContext } from "react";
 import { authContext } from "../context/authContext";
+import { TweetContext } from "../context/tweetContext";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
 	const { removeUser, loggedInUser } = useContext(authContext);
+	const { resetTweets } = useContext(TweetContext);
 	const logout = () => {
 		localStorage.removeItem("user");
 		removeUser();
-		console.log("from navbar", loggedInUser);
+		resetTweets();
 	};
 	return (
 		<div>

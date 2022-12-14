@@ -5,7 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 const CreateTweet = () => {
 	const [caption, setCaption] = React.useState("");
-	// const [author, setAuthor] = React.useState("");
+
 	const { addTweet } = useContext(TweetContext);
 
 	return (

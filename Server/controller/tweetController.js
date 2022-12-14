@@ -2,8 +2,9 @@ const express = require("express");
 const Tweet = require("../models/tweetModel");
 
 const getTweets = async (req, res) => {
+	const user_id = req.user._id;
 	try {
-		let allTweets = await Tweet.find({});
+		let allTweets = await Tweet.find({ user_id });
 		res.status(200).json(allTweets);
 	} catch (error) {
 		res.status(400).error(error.message);
@@ -16,7 +17,14 @@ const createTweet = async (req, res) => {
 
 	// async function to create a Tweet in db
 	try {
-		let tweet = await Tweet.create({ caption, likes, retweets, author });
+		const user_id = req.user._id;
+		let tweet = await Tweet.create({
+			caption,
+			likes,
+			retweets,
+			author,
+			user_id,
+		});
 		//if successful, send success status and json object back
 		res.status(200).json(tweet);
 
