@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import CreateTweet from "../components/CreateTweet";
 import TweetCard from "../components/TweetCard";
 import Navbar from "../components/Navbar";
+import FollowUsers from "../components/FollowUsers";
 import { useContext, useState } from "react";
 
 import { authContext } from "../context/authContext";
@@ -30,7 +31,6 @@ let Home = () => {
 
 		if (loggedInUser) {
 			fetchTweets();
-			console.log(tweets);
 		}
 	}, [loggedInUser]);
 
@@ -43,12 +43,15 @@ let Home = () => {
 					<CreateTweet />
 					{tweets &&
 						tweets.map((tweet) => (
-							<div key={tweet.author}>
+							<div key={tweet._id}>
 								{tweet.caption} {tweet.author.username}
 							</div>
 						))}
 				</div>
-				<div className="col border">This is the far RIGHT row</div>
+				<div className="col border">
+					<h1>USER list</h1>
+					<FollowUsers />
+				</div>
 			</div>
 		</div>
 	);

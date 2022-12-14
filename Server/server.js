@@ -4,6 +4,7 @@ const express = require("express");
 const app = express();
 const tweetRoutes = require("./routes/tweets");
 const userRoutes = require("./routes/auth");
+const getUserRoutes = require("./routes/user");
 const mongoose = require("mongoose");
 const path = require("path");
 const session = require("express-session");
@@ -30,6 +31,7 @@ app.use((req, res, next) => {
 
 app.use(userRoutes);
 app.use(tweetRoutes);
+app.use(getUserRoutes);
 // app.use(bodyParser.json());
 // app.use(bodyParser.urlencoded({ extended: true }));
 
