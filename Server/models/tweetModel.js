@@ -14,7 +14,8 @@ const tweetSchema = new Schema(
 			type: Number,
 		},
 		author: {
-			type: String,
+			type: Schema.Types.ObjectId,
+			ref: "User",
 		},
 		user_id: {
 			type: String,

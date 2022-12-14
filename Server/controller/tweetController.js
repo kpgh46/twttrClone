@@ -4,7 +4,7 @@ const Tweet = require("../models/tweetModel");
 const getTweets = async (req, res) => {
 	const user_id = req.user._id;
 	try {
-		let allTweets = await Tweet.find({ user_id });
+		let allTweets = await Tweet.find({ user_id }).populate("author");
 		res.status(200).json(allTweets);
 	} catch (error) {
 		res.status(400).error(error.message);
@@ -22,7 +22,7 @@ const createTweet = async (req, res) => {
 			caption,
 			likes,
 			retweets,
-			author,
+			author: user_id,
 			user_id,
 		});
 		//if successful, send success status and json object back

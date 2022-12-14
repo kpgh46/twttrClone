@@ -1,12 +1,14 @@
 import React from "react";
 import { useContext } from "react";
 import { TweetContext } from "../context/tweetContext";
+import { authContext } from "../context/authContext";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const CreateTweet = () => {
 	const [caption, setCaption] = React.useState("");
 
 	const { addTweet } = useContext(TweetContext);
+	const { loggedInUser } = useContext(authContext);
 
 	return (
 		<div className="container">

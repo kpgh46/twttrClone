@@ -42,7 +42,11 @@ let Home = () => {
 				<div className="col-6">
 					<CreateTweet />
 					{tweets &&
-						tweets.map((tweet) => <div>{tweet.caption}</div>)}
+						tweets.map((tweet) => (
+							<div key={tweet.author}>
+								{tweet.caption} {tweet.author.username}
+							</div>
+						))}
 				</div>
 				<div className="col border">This is the far RIGHT row</div>
 			</div>
