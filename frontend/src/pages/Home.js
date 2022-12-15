@@ -34,6 +34,24 @@ let Home = () => {
 		}
 	}, [loggedInUser]);
 
+	const addLike = async (_id) => {
+		let response = await fetch("api/addlike", {
+			method: "PATCH",
+			body: JSON.stringify({ _id }),
+			headers: {
+				Authorization: `Bearer ${loggedInUser.token}`,
+				"Content-Type": "application/json",
+			},
+		});
+		const json = await response.json();
+
+		if (response.ok) {
+			console.log("this worked from addLike", json);
+
+			// setUsers(json);
+		}
+	};
+
 	return (
 		<div className="container border">
 			<Navbar />
@@ -47,7 +65,10 @@ let Home = () => {
 								<div>Caption: {tweet.caption}</div>
 								<div>UserName:{tweet.author.username}</div>
 								<div>Likes: {tweet.likes}</div>
-								<div>ReShare: {tweet.retweet}</div>
+								<button onClick={() => addLike(tweet._id)}>
+									UP
+								</button>
+								<div>ReShare: {tweet.retweets}</div>
 								<div>---BREAK---</div>
 							</div>
 						))}

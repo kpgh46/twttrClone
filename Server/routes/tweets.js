@@ -1,6 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const { createTweet, getTweets } = require("../controller/tweetController");
+const {
+	createTweet,
+	getTweets,
+	addLike,
+} = require("../controller/tweetController");
 const requireAuth = require("../middleware/requireAuth");
 
 // const newTweet = require("../constructors/newTweet");
@@ -18,5 +22,7 @@ router.post("/api/tweets", createTweet);
 
 //delete a tweet
 //
+
+router.patch("/api/addlike", addLike);
 
 module.exports = router;

@@ -12,7 +12,7 @@ const getTweets = async (req, res) => {
 
 		res.status(200).json(allTweets);
 	} catch (error) {
-		res.status(400).error(error.message);
+		return res.status(400).error(error.message);
 	}
 };
 
@@ -63,4 +63,24 @@ const addFollow = async (req, res) => {
 	//update user
 };
 
-module.exports = { createTweet, getTweets, addFollow };
+const addLike = async (req, res) => {
+	const { _id } = req.body;
+	try {
+		const tweet = await Tweet.updateOne(
+			{ _id: _id },
+			{ $inc: { likes: 1 } }
+		);
+
+		const currentUser = await User.findOne(req.user._id);
+		console.log("From tweetController", currentUser);
+		const allTweets = await Tweet.find({
+			author: { $in: currentUser.follows },
+		}).populate("author");
+
+		res.status(200).json(allTweets);
+	} catch (error) {
+		return res.status(400).json({ error: error.message });
+	}
+};
+
+module.exports = { createTweet, getTweets, addFollow, addLike };

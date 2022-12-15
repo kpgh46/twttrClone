@@ -3,9 +3,10 @@ import { useContext, useState, useEffect } from "react";
 import { authContext } from "../context/authContext";
 
 const FollowUsers = () => {
-	const { loggedInUser } = useContext(authContext);
+	const { loggedInUser, setUser } = useContext(authContext);
 	const [users, setUsers] = useState(null);
 
+	//fetches all users in database.
 	useEffect(() => {
 		let fetchAllUsers = async () => {
 			let response = await fetch("api/users", {
@@ -24,6 +25,7 @@ const FollowUsers = () => {
 		fetchAllUsers();
 	}, [loggedInUser]);
 
+	//when "Follow" button is clicked, user is added to logged in user list of follows
 	const clickFollow = async (username) => {
 		let response = await fetch("api/addfollow", {
 			method: "PATCH",
@@ -37,6 +39,7 @@ const FollowUsers = () => {
 
 		if (response.ok) {
 			console.log("this worked from ClickFOllow", json);
+
 			// setUsers(json);
 		}
 	};
