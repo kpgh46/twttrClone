@@ -2,6 +2,7 @@ import React from "react";
 import { useContext } from "react";
 import { TweetContext } from "../context/tweetContext";
 import { authContext } from "../context/authContext";
+import Card from "react-bootstrap/Card";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const CreateTweet = () => {
@@ -17,6 +18,8 @@ const CreateTweet = () => {
 				<form onClick={() => addTweet(caption)}>
 					<label>Caption</label>
 					<input
+						className="form-control form-control-lg h-100"
+						placeholder="What you thinking bout?"
 						type="text"
 						onChange={(e) => {
 							setCaption(e.target.value);

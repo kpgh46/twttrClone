@@ -57,7 +57,6 @@ const TweetCard = () => {
 							<button onClick={() => addLike(tweet._id)}>
 								UP
 							</button>
-							<div>ReShare: {tweet.retweets}</div>
 						</div>
 					</Card>
 				))}
