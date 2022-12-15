@@ -3,9 +3,13 @@ const Tweet = require("../models/tweetModel");
 const User = require("../models/userModel");
 
 const getTweets = async (req, res) => {
-	const user_id = req.user._id;
 	try {
-		let allTweets = await Tweet.find({ user_id }).populate("author");
+		const currentUser = await User.findOne(req.user._id);
+		console.log("From tweetController", currentUser);
+		const allTweets = await Tweet.find({
+			author: { $in: currentUser.follows },
+		}).populate("author");
+
 		res.status(200).json(allTweets);
 	} catch (error) {
 		res.status(400).error(error.message);
@@ -21,8 +25,8 @@ const createTweet = async (req, res) => {
 		const user_id = req.user._id;
 		let tweet = await Tweet.create({
 			caption,
-			likes,
-			retweets,
+			likes: 0,
+			retweets: 0,
 			author: user_id,
 			user_id,
 		});

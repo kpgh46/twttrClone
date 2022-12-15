@@ -10,7 +10,7 @@ import LogIn from "./pages/LogIn";
 
 function App() {
 	const { loggedInUser } = useContext(authContext);
-	console.log("from app.js", loggedInUser);
+
 	return (
 		<div className="App">
 			<BrowserRouter>

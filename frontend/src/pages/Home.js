@@ -44,7 +44,11 @@ let Home = () => {
 					{tweets &&
 						tweets.map((tweet) => (
 							<div key={tweet._id}>
-								{tweet.caption} {tweet.author.username}
+								<div>Caption: {tweet.caption}</div>
+								<div>UserName:{tweet.author.username}</div>
+								<div>Likes: {tweet.likes}</div>
+								<div>ReShare: {tweet.retweet}</div>
+								<div>---BREAK---</div>
 							</div>
 						))}
 				</div>
