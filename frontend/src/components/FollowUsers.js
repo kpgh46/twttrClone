@@ -24,13 +24,32 @@ const FollowUsers = () => {
 		fetchAllUsers();
 	}, [loggedInUser]);
 
+	const clickFollow = async (username) => {
+		let response = await fetch("api/addfollow", {
+			method: "PATCH",
+			body: JSON.stringify({ username }),
+			headers: {
+				Authorization: `Bearer ${loggedInUser.token}`,
+				"Content-Type": "application/json",
+			},
+		});
+		const json = await response.json();
+
+		if (response.ok) {
+			console.log("this worked from ClickFOllow", json);
+			// setUsers(json);
+		}
+	};
+
 	return (
 		<div>
 			{users &&
 				users.allUsers.map((user) => (
 					<div>
 						{user.username}
-						<button>Follow</button>
+						<button onClick={() => clickFollow(user._id)}>
+							Follow
+						</button>
 					</div>
 				))}
 		</div>

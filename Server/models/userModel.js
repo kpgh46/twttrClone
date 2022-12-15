@@ -10,6 +10,11 @@ const User = new Schema({
 		type: String,
 		required: true,
 	},
+	follows: {
+		type: Array,
+	},
 });
 
 module.exports = mongoose.model("User", User);
+
+// type: [{ type: Schema.Types.ObjectId, ref: "User" }],

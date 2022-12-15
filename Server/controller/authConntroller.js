@@ -12,6 +12,7 @@ const createToken = (_id) => {
 //sign up
 const signUp = async (req, res) => {
 	const { username, password } = req.body;
+	// console.log(username, password);
 
 	//check if username already exists in database
 	const exists = await User.findOne({ username });

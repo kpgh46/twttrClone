@@ -1,5 +1,6 @@
 const express = require("express");
 const Tweet = require("../models/tweetModel");
+const User = require("../models/userModel");
 
 const getTweets = async (req, res) => {
 	const user_id = req.user._id;
@@ -34,4 +35,28 @@ const createTweet = async (req, res) => {
 	}
 };
 
-module.exports = { createTweet, getTweets };
+const addFollow = async (req, res) => {
+	//username of button
+	const { username } = req.body;
+	const { currentUser } = req.user._id;
+	//ID of logged in user
+	console.log(username, req.user._id);
+
+	//locate user
+	console.log("sup");
+	User.findByIdAndUpdate(
+		//doesnt like this
+		req.user._id,
+		{ $push: { follows: username } },
+		{ new: true, upsert: true },
+		(error, updatedRecord) => {
+			if (error) {
+				console.log(error);
+			}
+			res.status(200).json({ updatedRecord });
+		}
+	);
+	//update user
+};
+
+module.exports = { createTweet, getTweets, addFollow };
