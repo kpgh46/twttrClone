@@ -15,20 +15,21 @@ const CreateTweet = () => {
 
 	return (
 		<div className="container">
-			<div className="row">HOME</div>
 			<div className="row">
-				<form onClick={() => addTweet(caption)}>
-					<label>Caption</label>
-					<input
-						className="form-control form-control-lg h-100"
-						placeholder="What you thinking bout?"
-						type="text"
-						onChange={(e) => {
-							setCaption(e.target.value);
-						}}
-					></input>
+				<Form onClick={() => addTweet(caption)}>
+					<FloatingLabel
+						controlId="floatingTextarea2"
+						label="What are you thinking about?"
+					>
+						<Form.Control
+							as="textarea"
+							placeholder=""
+							style={{ height: "100px" }}
+							onChange={(e) => setCaption(e.target.value)}
+						/>
+					</FloatingLabel>
 					<button>Submit</button>
-				</form>
+				</Form>
 			</div>
 		</div>
 	);

@@ -6,6 +6,9 @@ import { authContext } from "../context/authContext";
 import { TweetContext } from "../context/tweetContext";
 import formatDistanceToNow from "date-fns/formatDistanceToNow";
 import { FaArrowCircleUp } from "react-icons/fa";
+import ToastHeader from "react-bootstrap/ToastHeader";
+import CloseButton from "react-bootstrap/CloseButton";
+import { AiFillCloseCircle } from "react-icons/ai";
 
 const TweetCard = () => {
 	const { loggedInUser } = useContext(authContext);
@@ -68,38 +71,37 @@ const TweetCard = () => {
 		<div>
 			{tweets &&
 				tweets.map((tweet) => (
-					<Toast>
+					<Toast className="container mb-3">
 						<div key={tweet._id}>
-							<Toast.Header>
+							<Toast.Header closeButton={false}>
 								<img
 									src="holder.js/20x20?text=%20"
 									className="rounded me-2"
 									alt=""
 								/>
-								<strong className="me-auto">
+								<strong className="me-auto fs-5">
 									{tweet.author.username}
 								</strong>
-								<small>
-									{formatDistanceToNow(
-										new Date(tweet.createdAt),
-										{ addSuffix: true }
-									)}
-								</small>
+								<AiFillCloseCircle
+									onClick={() => deleteTweet(tweet._id)}
+								></AiFillCloseCircle>
 							</Toast.Header>
-							<div className="container m-2">
+							{tweet.caption}
+							<div className="container m-1">
 								<div className="row">
 									<div className="col-1">
 										<FaArrowCircleUp
 											onClick={() => addLike(tweet._id)}
-										>
-											UP
-										</FaArrowCircleUp>
-										<div>{tweet.likes}</div>
+										></FaArrowCircleUp>
 									</div>
-									<div className="col-11">
-										{" "}
-										{tweet.caption}
-									</div>
+									<div className="col-1">{tweet.likes}</div>
+
+									<small className="col-10 d-flex justify-content-end">
+										{formatDistanceToNow(
+											new Date(tweet.createdAt),
+											{ addSuffix: true }
+										)}
+									</small>
 								</div>
 							</div>
 						</div>
