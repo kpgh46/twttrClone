@@ -83,4 +83,18 @@ const addLike = async (req, res) => {
 	}
 };
 
-module.exports = { createTweet, getTweets, addFollow, addLike };
+const deleteTweet = async (req, res) => {
+	const { _id } = req.body;
+	try {
+		await Tweet.deleteOne({ _id });
+		const currentUser = await User.findOne(req.user._id);
+		const allTweets = await Tweet.find({
+			author: { $in: currentUser.follows },
+		}).populate("author");
+
+		res.status(200).json(allTweets);
+	} catch (error) {
+		return res.status(400).json({ error: error.message });
+	}
+};
+module.exports = { createTweet, getTweets, addFollow, addLike, deleteTweet };

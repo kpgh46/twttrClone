@@ -45,6 +45,23 @@ const TweetCard = () => {
 			// setUsers(json);
 		}
 	};
+
+	const deleteTweet = async (_id) => {
+		let response = await fetch("api/deletetweet", {
+			method: "DELETE",
+			body: JSON.stringify({ _id }),
+			headers: {
+				Authorization: `Bearer ${loggedInUser.token}`,
+				"Content-Type": "application/json",
+			},
+		});
+		const json = await response.json();
+
+		if (response.ok) {
+			console.log("this worked from addLike", json);
+		}
+		// console.log("sup");
+	};
 	return (
 		<div>
 			{tweets &&
@@ -56,6 +73,10 @@ const TweetCard = () => {
 							<div>Likes: {tweet.likes}</div>
 							<button onClick={() => addLike(tweet._id)}>
 								UP
+							</button>
+							<br></br>
+							<button onClick={() => deleteTweet(tweet._id)}>
+								Delete
 							</button>
 						</div>
 					</Card>
