@@ -3,6 +3,8 @@ import { useContext } from "react";
 import { TweetContext } from "../context/tweetContext";
 import { authContext } from "../context/authContext";
 import Card from "react-bootstrap/Card";
+import FloatingLabel from "react-bootstrap/FloatingLabel";
+import Form from "react-bootstrap/Form";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const CreateTweet = () => {

@@ -25,7 +25,7 @@ const TweetContextProvider = (props) => {
 	let addTweet = async (caption, author, likes, retweets) => {
 		const response = await fetch("/api/tweets", {
 			method: "POST",
-			body: JSON.stringify({ caption, likes, retweets }),
+			body: JSON.stringify({ caption, likes, retweets, author }),
 			headers: {
 				"Content-Type": "application/json",
 				Authorization: `Bearer ${loggedInUser.token}`,

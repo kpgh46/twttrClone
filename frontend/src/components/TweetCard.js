@@ -1,9 +1,11 @@
 import React from "react";
 import Card from "react-bootstrap/Card";
+import Toast from "react-bootstrap/Toast";
 import { useContext, useEffect } from "react";
 import { authContext } from "../context/authContext";
 import { TweetContext } from "../context/tweetContext";
-// import formatDistanceToNow from "date-fns/formatDistanceToNow";
+import formatDistanceToNow from "date-fns/formatDistanceToNow";
+import { FaArrowCircleUp } from "react-icons/fa";
 
 const TweetCard = () => {
 	const { loggedInUser } = useContext(authContext);
@@ -66,20 +68,42 @@ const TweetCard = () => {
 		<div>
 			{tweets &&
 				tweets.map((tweet) => (
-					<Card>
+					<Toast>
 						<div key={tweet._id}>
-							<div>Caption: {tweet.caption}</div>
-							<div>UserName:{tweet.author.username}</div>
-							<div>Likes: {tweet.likes}</div>
-							<button onClick={() => addLike(tweet._id)}>
-								UP
-							</button>
-							<br></br>
-							<button onClick={() => deleteTweet(tweet._id)}>
-								Delete
-							</button>
+							<Toast.Header>
+								<img
+									src="holder.js/20x20?text=%20"
+									className="rounded me-2"
+									alt=""
+								/>
+								<strong className="me-auto">
+									{tweet.author.username}
+								</strong>
+								<small>
+									{formatDistanceToNow(
+										new Date(tweet.createdAt),
+										{ addSuffix: true }
+									)}
+								</small>
+							</Toast.Header>
+							<div className="container m-2">
+								<div className="row">
+									<div className="col-1">
+										<FaArrowCircleUp
+											onClick={() => addLike(tweet._id)}
+										>
+											UP
+										</FaArrowCircleUp>
+										<div>{tweet.likes}</div>
+									</div>
+									<div className="col-11">
+										{" "}
+										{tweet.caption}
+									</div>
+								</div>
+							</div>
 						</div>
-					</Card>
+					</Toast>
 				))}
 		</div>
 	);
