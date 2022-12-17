@@ -4,8 +4,20 @@ import { authContext } from "../context/authContext";
 import { AiOutlineUserAdd } from "react-icons/ai";
 
 const FollowUsers = () => {
-	const { loggedInUser, setUser } = useContext(authContext);
+	const { loggedInUser } = useContext(authContext);
 	const [users, setUsers] = useState(null);
+	const [render, setRender] = useState(false);
+
+	const findUnqiue = (arr1, arr2) => {
+		let empty = [];
+
+		arr2.forEach((item) => {
+			if (!arr1.includes(item._id)) {
+				empty.push(item);
+			}
+		});
+		return empty;
+	};
 
 	//fetches all users in database.
 	useEffect(() => {
@@ -18,13 +30,18 @@ const FollowUsers = () => {
 			const json = await response.json();
 
 			if (response.ok) {
-				console.log("current users from HOME", json);
-				setUsers(json);
+				let loggedInFollows = loggedInUser.user.follows;
+				let allUsers = json.allUsers;
+				const unFollowedUsers = findUnqiue(loggedInFollows, allUsers);
+
+				// console.log(unFollowedUsers);
+				console.log(users);
+				setUsers(unFollowedUsers);
 			}
 		};
 
 		fetchAllUsers();
-	}, [loggedInUser]);
+	}, [render]);
 
 	//when "Follow" button is clicked, user is added to logged in user list of follows
 	const clickFollow = async (username) => {
@@ -41,19 +58,20 @@ const FollowUsers = () => {
 		if (response.ok) {
 			console.log("this worked from ClickFOllow", json);
 
-			// setUsers(json);
+			setRender((prev) => !prev);
+			// console.log(render);
 		}
 	};
 
 	return (
 		<div>
 			{users &&
-				users.allUsers.map((user) => (
+				users.map((user) => (
 					<div>
 						{user.username}
-						<AiOutlineUserAdd onClick={() => clickFollow(user._id)}>
-							Follow
-						</AiOutlineUserAdd>
+						<AiOutlineUserAdd
+							onClick={() => clickFollow(user._id)}
+						></AiOutlineUserAdd>
 					</div>
 				))}
 		</div>

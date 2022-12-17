@@ -67,4 +67,14 @@ const getAllUsers = async (req, res) => {
 	}
 };
 
+// const getUnfollowedUsers = async (req, res) => {
+// 	try{
+// 	const currentUser = await User.findOne(req.user._id);
+
+// 	}
+// 	catch(error){
+
+// 	}
+// }
+
 module.exports = { signUp, logIn, getAllUsers };

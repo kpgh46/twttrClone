@@ -5,7 +5,6 @@ const User = require("../models/userModel");
 const getTweets = async (req, res) => {
 	try {
 		const currentUser = await User.findOne(req.user._id);
-		console.log("From tweetController", currentUser);
 		const allTweets = await Tweet.find({
 			author: { $in: currentUser.follows },
 		}).populate("author");
