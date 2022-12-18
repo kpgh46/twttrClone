@@ -7,9 +7,17 @@ const getTweets = async (req, res) => {
 		const currentUser = await User.findOne(req.user._id);
 		const allTweets = await Tweet.find({
 			author: { $in: currentUser.follows },
-		}).populate("author");
+		})
+			.sort({ createdAt: -1 })
+			.populate("author");
 
-		res.status(200).json(allTweets);
+		const userTweets = await Tweet.find({ author: req.user._id })
+			.sort({ createdAt: -1 })
+			.populate("author");
+
+		const newAllTweets = [...allTweets, ...userTweets];
+
+		res.status(200).json(newAllTweets);
 	} catch (error) {
 		return res.status(400).error(error.message);
 	}
