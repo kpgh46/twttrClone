@@ -59,6 +59,7 @@ const FollowUsers = () => {
 		if (response.ok) {
 			console.log("this worked from ClickFOllow", json);
 			setUser(json);
+			localStorage.setItem("user", JSON.stringify(json));
 
 			setRender((prev) => !prev);
 		}
