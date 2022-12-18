@@ -37,6 +37,31 @@ const signUp = async (req, res) => {
 	}
 };
 
+const addFollow = async (req, res) => {
+	//username of button
+	const { username } = req.body;
+	const { currentUser } = req.user._id;
+	//ID of logged in user
+	console.log(username, req.user._id);
+	const token = await createToken(req.user._id);
+
+	//locate user
+	console.log("sup");
+	User.findByIdAndUpdate(
+		//doesnt like this
+		req.user._id,
+		{ $push: { follows: username } },
+		{ new: true, upsert: true },
+		(error, updatedRecord) => {
+			if (error) {
+				console.log(error);
+			}
+			res.status(200).json({ user: updatedRecord, token });
+		}
+	);
+	//update user
+};
+
 const logIn = async (req, res) => {
 	const { username, password } = req.body;
 
@@ -77,4 +102,4 @@ const getAllUsers = async (req, res) => {
 // 	}
 // }
 
-module.exports = { signUp, logIn, getAllUsers };
+module.exports = { signUp, logIn, getAllUsers, addFollow };

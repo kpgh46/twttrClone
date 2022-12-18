@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { getAllUsers } = require("../controller/authConntroller");
-const { addFollow } = require("../controller/tweetController");
+const { getAllUsers, addFollow } = require("../controller/authConntroller");
 
 //get all users
 

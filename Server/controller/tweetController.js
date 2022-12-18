@@ -38,30 +38,6 @@ const createTweet = async (req, res) => {
 	}
 };
 
-const addFollow = async (req, res) => {
-	//username of button
-	const { username } = req.body;
-	const { currentUser } = req.user._id;
-	//ID of logged in user
-	console.log(username, req.user._id);
-
-	//locate user
-	console.log("sup");
-	User.findByIdAndUpdate(
-		//doesnt like this
-		req.user._id,
-		{ $push: { follows: username } },
-		{ new: true, upsert: true },
-		(error, updatedRecord) => {
-			if (error) {
-				console.log(error);
-			}
-			res.status(200).json({ updatedRecord });
-		}
-	);
-	//update user
-};
-
 const addLike = async (req, res) => {
 	const { _id } = req.body;
 	try {
@@ -96,4 +72,4 @@ const deleteTweet = async (req, res) => {
 		return res.status(400).json({ error: error.message });
 	}
 };
-module.exports = { createTweet, getTweets, addFollow, addLike, deleteTweet };
+module.exports = { createTweet, getTweets, addLike, deleteTweet };

@@ -4,7 +4,7 @@ import { authContext } from "../context/authContext";
 import { AiOutlineUserAdd } from "react-icons/ai";
 
 const FollowUsers = () => {
-	const { loggedInUser } = useContext(authContext);
+	const { loggedInUser, setUser } = useContext(authContext);
 	const [users, setUsers] = useState(null);
 	const [render, setRender] = useState(false);
 
@@ -58,6 +58,8 @@ const FollowUsers = () => {
 
 		if (response.ok) {
 			console.log("this worked from ClickFOllow", json);
+			setUser(json);
+
 			setRender((prev) => !prev);
 		}
 	};
