@@ -5,6 +5,7 @@ export const authContext = createContext();
 
 const AuthContextProvider = (props) => {
 	const [loggedInUser, setLoggedInUser] = useState(null);
+	const [currentUsers, setCurrentUsers] = useState([]);
 
 	const setUser = (user) => {
 		setLoggedInUser(user);
@@ -16,11 +17,17 @@ const AuthContextProvider = (props) => {
 
 	useEffect(() => {
 		const user = JSON.parse(localStorage.getItem("user"));
+		console.log("from AuthContext", user);
 
 		if (user) {
 			setUser(user);
 		}
 	}, []);
+
+	// useEffect(() => {
+	// 	localStorage.setItem("user", JSON.stringify(loggedInUser));
+	// 	// setUser(loggedInUser);
+	// }, []);
 
 	console.log("From Context:", loggedInUser);
 

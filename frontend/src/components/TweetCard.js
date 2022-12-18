@@ -32,7 +32,7 @@ const TweetCard = () => {
 		if (loggedInUser) {
 			fetchTweets();
 		}
-	}, [loggedInUser]);
+	});
 
 	const addLike = async (_id) => {
 		let response = await fetch("api/addlike", {
@@ -64,7 +64,7 @@ const TweetCard = () => {
 		const json = await response.json();
 
 		if (response.ok) {
-			console.log("this worked from addLike", json);
+			console.log("this worked from DeleteTweet", json);
 		}
 		// console.log("sup");
 	};

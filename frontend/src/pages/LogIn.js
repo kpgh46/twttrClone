@@ -30,7 +30,6 @@ const LogIn = () => {
 		if (response.ok) {
 			localStorage.setItem("user", JSON.stringify(json));
 			setUser(json);
-			console.log("We should be logged in", loggedInUser);
 		}
 	};
 
