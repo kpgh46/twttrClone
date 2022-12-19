@@ -1,11 +1,13 @@
 import React from "react";
+import Container from "react-bootstrap/Container";
+import Navbar from "react-bootstrap/Navbar";
 
 import { useContext } from "react";
 import { authContext } from "../context/authContext";
 import { TweetContext } from "../context/tweetContext";
 import { Link } from "react-router-dom";
 
-const Navbar = () => {
+const NavigationBar = () => {
 	const { removeUser, loggedInUser } = useContext(authContext);
 	const { resetTweets } = useContext(TweetContext);
 	const logout = () => {
@@ -31,4 +33,4 @@ const Navbar = () => {
 	);
 };
 
-export default Navbar;
+export default NavigationBar;

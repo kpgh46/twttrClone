@@ -1,7 +1,7 @@
 import React from "react";
 import CreateTweet from "../components/CreateTweet";
 import TweetCard from "../components/TweetCard";
-import Navbar from "../components/Navbar";
+import NavigationBar from "../components/Navbar";
 import FollowUsers from "../components/FollowUsers";
 import Header from "../components/Header";
 import Card from "react-bootstrap/Card";
@@ -12,7 +12,7 @@ let Home = () => {
 	return (
 		<div className="container border">
 			<Header />
-			<Navbar />
+			<NavigationBar />
 			<div className="row">
 				<Card className="col-3 border">
 					<CreateTweet />
