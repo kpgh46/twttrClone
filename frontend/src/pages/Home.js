@@ -10,20 +10,19 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 let Home = () => {
 	return (
-		<div className="container border">
-			<Header />
+		<div className="container w-75">
 			<NavigationBar />
 			<div className="row">
-				<Card className="col-3 border">
+				<div className="col-3 border-end">
 					<CreateTweet />
-				</Card>
+				</div>
 				<div className="col-6">
 					<TweetCard />
 				</div>
-				<Card className="col border">
+				<div className="col border-start">
 					<h1>USER list</h1>
 					<FollowUsers />
-				</Card>
+				</div>
 			</div>
 		</div>
 	);

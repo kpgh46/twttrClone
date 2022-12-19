@@ -2,6 +2,7 @@ import React from "react";
 import { useState, useContext } from "react";
 import { authContext } from "../context/authContext";
 import Navbar from "../components/Navbar";
+import Button from "react-bootstrap/Button";
 
 const SignUp = () => {
 	let [username, setUserName] = useState("");
