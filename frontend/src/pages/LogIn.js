@@ -34,28 +34,42 @@ const LogIn = () => {
 	};
 
 	return (
-		<div>
+		<div className="container w-75">
 			<Navbar />
-			<div>Please Log In</div>
-			<form onSubmit={clickLogIn}>
-				<label>Username</label>
-				<input
-					name="username"
-					placeholder="username"
-					type="text"
-					onChange={(e) => setUserName(e.target.value)}
-				/>
-				<label>Password</label>
-				<input
-					name="password"
-					type="password"
-					onChange={(e) => {
-						setPassword(e.target.value);
-					}}
-				/>
-				<button>Log In</button>
-				{error && <div>{error.message}</div>}
-				{loggedInUser && <div>{loggedInUser.user.username}</div>}
+			<form
+				className="container w-50 border rounded-2 mt-3"
+				onSubmit={clickLogIn}
+			>
+				<div class="mb-3">
+					<label for="exampleInputEmail1" class="form-label">
+						Username
+					</label>
+					<input
+						type="text"
+						class="form-control"
+						id="exampleInputEmail1"
+						aria-describedby="emailHelp"
+						onChange={(e) => setUserName(e.target.value)}
+					></input>
+					<div id="emailHelp" class="form-text">
+						Could be an error message here
+					</div>
+				</div>
+				<div class="mb-3">
+					<label for="exampleInputPassword1" class="form-label">
+						Password
+					</label>
+					<input
+						type="password"
+						class="form-control"
+						id="exampleInputPassword1"
+						onChange={(e) => setPassword(e.target.value)}
+					></input>
+				</div>
+
+				<button type="submit" class="btn btn-primary mb-2">
+					Submit
+				</button>
 			</form>
 		</div>
 	);

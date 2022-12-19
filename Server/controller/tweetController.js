@@ -8,14 +8,15 @@ const getTweets = async (req, res) => {
 		const allTweets = await Tweet.find({
 			author: { $in: currentUser.follows },
 		})
-			.sort({ createdAt: -1 })
+			.sort({ createdAt: 1 })
 			.populate("author");
 
 		const userTweets = await Tweet.find({ author: req.user._id })
-			.sort({ createdAt: -1 })
+			.sort({ createdAt: 1 })
 			.populate("author");
 
-		const newAllTweets = [...allTweets, ...userTweets];
+		const newAllTweets = [...userTweets, ...allTweets];
+		// console.log(newAllTweets);
 
 		res.status(200).json(newAllTweets);
 	} catch (error) {

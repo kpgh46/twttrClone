@@ -1,7 +1,8 @@
 import React from "react";
 import { useContext, useState, useEffect } from "react";
 import { authContext } from "../context/authContext";
-import { AiOutlineUserAdd } from "react-icons/ai";
+
+import { MdPersonAddAlt1 } from "react-icons/md";
 
 const FollowUsers = () => {
 	const { loggedInUser, setUser } = useContext(authContext);
@@ -69,11 +70,13 @@ const FollowUsers = () => {
 		<div>
 			{users &&
 				users.map((user) => (
-					<div>
+					<div className="fs-5 pt-1">
 						{user.username}
-						<AiOutlineUserAdd
+						{"  "}
+						<MdPersonAddAlt1
+							className="pb-1"
 							onClick={() => clickFollow(user._id)}
-						></AiOutlineUserAdd>
+						></MdPersonAddAlt1>
 					</div>
 				))}
 		</div>

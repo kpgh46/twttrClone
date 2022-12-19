@@ -20,7 +20,7 @@ let Home = () => {
 					<TweetCard />
 				</div>
 				<div className="col border-start">
-					<h1>USER list</h1>
+					<div>Suggested Follows:</div>
 					<FollowUsers />
 				</div>
 			</div>
