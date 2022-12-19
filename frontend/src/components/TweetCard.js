@@ -31,6 +31,7 @@ const TweetCard = () => {
 
 		if (loggedInUser) {
 			fetchTweets();
+			console.log(loggedInUser);
 		}
 	});
 
@@ -75,19 +76,36 @@ const TweetCard = () => {
 					<Toast className="container mb-3">
 						<div key={tweet._id}>
 							<Toast.Header closeButton={false}>
-								<BsPersonBoundingBox
-									style={{
-										height: "30px",
-										width: "30px",
-										paddingRight: "9px",
-									}}
-								/>
+								{!tweet.author.url ? (
+									<BsPersonBoundingBox
+										style={{
+											height: "30px",
+											width: "30px",
+											paddingRight: "9px",
+										}}
+									/>
+								) : (
+									<img
+										src={tweet.author.url}
+										style={{
+											height: "30px",
+											width: "35px",
+											marginRight: "7px",
+											borderRadius: "5px",
+											border: ".5px solid",
+										}}
+									></img>
+								)}
 								<strong className="me-auto fs-5">
 									{tweet.author.username}
 								</strong>
-								<AiFillCloseCircle
-									onClick={() => deleteTweet(tweet._id)}
-								></AiFillCloseCircle>
+								{loggedInUser.user._id === tweet.author._id ? (
+									<AiFillCloseCircle
+										onClick={() => deleteTweet(tweet._id)}
+									></AiFillCloseCircle>
+								) : (
+									<div></div>
+								)}
 							</Toast.Header>
 							{tweet.caption}
 							<img

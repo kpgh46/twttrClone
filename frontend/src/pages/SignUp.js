@@ -7,6 +7,7 @@ import Button from "react-bootstrap/Button";
 const SignUp = () => {
 	let [username, setUserName] = useState("");
 	let [password, setPassword] = useState("");
+	let [url, setUrl] = useState("");
 	let [error, setError] = useState(null);
 	let { loggedInUser, setUser } = useContext(authContext);
 
@@ -15,7 +16,7 @@ const SignUp = () => {
 		setError(null);
 
 		//create object for username and password
-		const user = { username, password };
+		const user = { username, password, url };
 
 		//post request to api/signup.  sends stringified JSON
 		const response = await fetch("api/signup", {
@@ -35,7 +36,6 @@ const SignUp = () => {
 		if (response.ok) {
 			localStorage.setItem("user", JSON.stringify(json));
 			setUser(json);
-			console.log("from SignUp", loggedInUser);
 		}
 	};
 
@@ -54,7 +54,6 @@ const SignUp = () => {
 					<input
 						type="text"
 						class="form-control"
-						id="exampleInputEmail1"
 						aria-describedby="emailHelp"
 						onChange={(e) => setUserName(e.target.value)}
 					></input>
@@ -69,8 +68,17 @@ const SignUp = () => {
 					<input
 						type="password"
 						class="form-control"
-						id="exampleInputPassword1"
 						onChange={(e) => setPassword(e.target.value)}
+					></input>
+				</div>
+				<div class="mb-3">
+					<label for="exampleInputPassword1" class="form-label">
+						URL for profile (Optional)
+					</label>
+					<input
+						type="text"
+						class="form-control"
+						onChange={(e) => setUrl(e.target.value)}
 					></input>
 				</div>
 

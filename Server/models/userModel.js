@@ -10,6 +10,9 @@ const User = new Schema({
 		type: String,
 		required: true,
 	},
+	url: {
+		type: String,
+	},
 	follows: {
 		type: Array,
 	},
