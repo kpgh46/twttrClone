@@ -80,7 +80,7 @@ const TweetCard = () => {
 									<BsPersonBoundingBox
 										style={{
 											height: "30px",
-											width: "30px",
+											width: "35px",
 											paddingRight: "9px",
 										}}
 									/>
