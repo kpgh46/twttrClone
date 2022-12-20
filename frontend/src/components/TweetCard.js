@@ -10,6 +10,8 @@ import ToastHeader from "react-bootstrap/ToastHeader";
 import CloseButton from "react-bootstrap/CloseButton";
 import { AiFillCloseCircle } from "react-icons/ai";
 import { BsPersonBoundingBox } from "react-icons/bs";
+import CommentPage from "./CommentPage";
+import { Link } from "react-router-dom";
 
 const TweetCard = () => {
 	const { loggedInUser } = useContext(authContext);
@@ -125,8 +127,15 @@ const TweetCard = () => {
 										></FaArrowCircleUp>
 									</div>
 									<div className="col-1">{tweet.likes}</div>
+									<Link
+										to={`/${tweet._id}`}
+										state={{ tweet: tweet }}
+										className="col-2"
+									>
+										Com
+									</Link>
 
-									<small className="col-10 d-flex justify-content-end">
+									<small className="col-7 d-flex justify-content-end">
 										{formatDistanceToNow(
 											new Date(tweet.createdAt),
 											{ addSuffix: true }

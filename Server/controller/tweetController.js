@@ -56,7 +56,7 @@ const addLike = async (req, res) => {
 		);
 
 		const currentUser = await User.findOne(req.user._id);
-		console.log("From tweetController", currentUser);
+		// console.log("From tweetController", currentUser);
 		const allTweets = await Tweet.find({
 			author: { $in: currentUser.follows },
 		}).populate("author");
