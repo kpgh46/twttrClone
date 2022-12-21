@@ -19,9 +19,16 @@ const CommentPage = (props) => {
 		const json = await response.json();
 
 		if (response.ok) {
-			console.log(json);
+			console.log(props.allComments);
 		}
 	};
+
+	//filter comments for specific tweet
+	let tweetComments = props.allComments.filter((comment) => {
+		if (comment.tweet === props.tweetId) {
+			return comment;
+		}
+	});
 
 	return (
 		<div>
@@ -32,8 +39,8 @@ const CommentPage = (props) => {
 				type="text"
 				onChange={(e) => setComment(e.target.value)}
 			></input>
-
-			<div>{props.username}</div>
+			{tweetComments &&
+				tweetComments.map((comment) => <div>{comment.text}</div>)}
 		</div>
 	);
 };

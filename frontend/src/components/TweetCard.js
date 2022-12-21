@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Card from "react-bootstrap/Card";
 import Toast from "react-bootstrap/Toast";
 import { useContext, useEffect } from "react";
@@ -16,6 +16,8 @@ import { Link } from "react-router-dom";
 const TweetCard = () => {
 	const { loggedInUser } = useContext(authContext);
 	const { tweets, setTweets } = useContext(TweetContext);
+	const [allComments, setAllComments] = useState(null);
+	const [render, setRender] = useState(true);
 
 	useEffect(() => {
 		const fetchTweets = async () => {
@@ -27,15 +29,17 @@ const TweetCard = () => {
 			let json = await response.json();
 
 			if (response.ok) {
-				setTweets(json);
+				setTweets(json.allTweets);
+				setAllComments(json.allComments);
 			}
 		};
 
 		if (loggedInUser) {
 			fetchTweets();
 			// console.log(loggedInUser);
+			// setRender((render) => !render);
 		}
-	}, []);
+	}, [render]);
 
 	const addLike = async (_id) => {
 		let response = await fetch("api/addlike", {
@@ -141,7 +145,10 @@ const TweetCard = () => {
 										id={`${tweet.author.username}${index}`}
 										class="collapse show"
 									>
-										<CommentPage tweetId={tweet._id} />
+										<CommentPage
+											tweetId={tweet._id}
+											allComments={allComments}
+										/>
 									</div>
 
 									<small className="col-7 d-flex justify-content-end">

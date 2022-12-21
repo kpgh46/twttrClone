@@ -6,7 +6,7 @@ const Comment = require("../models/commentModel");
 const getTweets = async (req, res) => {
 	try {
 		const currentUser = await User.findOne(req.user._id);
-		const allTweets = await Tweet.find({
+		const userFollowerTweets = await Tweet.find({
 			author: { $in: currentUser.follows },
 		})
 			.sort({ createdAt: 1 })
@@ -16,10 +16,14 @@ const getTweets = async (req, res) => {
 			.sort({ createdAt: 1 })
 			.populate("author");
 
-		const newAllTweets = [...userTweets, ...allTweets];
-		// console.log(newAllTweets);
+		const allComments = await Comment.find({}).populate("author");
 
-		res.status(200).json(newAllTweets);
+		const allTweets = [...userTweets, ...userFollowerTweets];
+
+		res.status(200).json({
+			allTweets: allTweets,
+			allComments: allComments,
+		});
 	} catch (error) {
 		return res.status(400).error(error.message);
 	}
