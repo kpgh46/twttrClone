@@ -5,6 +5,7 @@ const {
 	getTweets,
 	addLike,
 	deleteTweet,
+	addComment,
 } = require("../controller/tweetController");
 const requireAuth = require("../middleware/requireAuth");
 
@@ -25,5 +26,8 @@ router.post("/api/tweets", createTweet);
 router.delete("/api/deletetweet", deleteTweet);
 
 router.patch("/api/addlike", addLike);
+
+//create a comment
+router.post("/api/addcomment", addComment);
 
 module.exports = router;

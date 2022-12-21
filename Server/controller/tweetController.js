@@ -1,6 +1,7 @@
 const express = require("express");
 const Tweet = require("../models/tweetModel");
 const User = require("../models/userModel");
+const Comment = require("../models/commentModel");
 
 const getTweets = async (req, res) => {
 	try {
@@ -81,4 +82,25 @@ const deleteTweet = async (req, res) => {
 		return res.status(400).json({ error: error.message });
 	}
 };
-module.exports = { createTweet, getTweets, addLike, deleteTweet };
+
+const addComment = async (req, res) => {
+	const { text } = req.body;
+
+	try {
+		const currentUser = await User.findOne(req.user._id);
+		const currentTweet = await Tweet.findById(req.body.tweetId);
+		// console.log(currentUser, currentTweet, req.body.text);
+		const newComment = await Comment.create({
+			tweet: req.body.tweetId,
+			text: req.body.text,
+			author: req.user._id,
+		});
+
+		res.status(200).json(newComment);
+		console.log(newComment);
+	} catch (error) {
+		res.status(400).json({ error: error.message });
+	}
+};
+
+module.exports = { createTweet, getTweets, addLike, deleteTweet, addComment };

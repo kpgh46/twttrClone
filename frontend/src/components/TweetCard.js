@@ -73,7 +73,7 @@ const TweetCard = () => {
 	return (
 		<div>
 			{tweets &&
-				tweets.map((tweet) => (
+				tweets.map((tweet, index) => (
 					<Toast className="container mb-3">
 						<div key={tweet._id}>
 							<Toast.Header closeButton={false}>
@@ -132,16 +132,16 @@ const TweetCard = () => {
 										class="btn btn-primary"
 										data-bs-toggle="collapse"
 										data-bs-target={[
-											`#${tweet.author.username}`,
+											`#${tweet.author.username}${index}`,
 										]}
 									>
 										Simple collapsible
 									</button>
 									<div
-										id={`${tweet.author.username}`}
+										id={`${tweet.author.username}${index}`}
 										class="collapse show"
 									>
-										sup
+										<CommentPage tweetId={tweet._id} />
 									</div>
 
 									<small className="col-7 d-flex justify-content-end">
