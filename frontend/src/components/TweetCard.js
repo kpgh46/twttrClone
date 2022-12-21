@@ -33,9 +33,9 @@ const TweetCard = () => {
 
 		if (loggedInUser) {
 			fetchTweets();
-			console.log(loggedInUser);
+			// console.log(loggedInUser);
 		}
-	});
+	}, []);
 
 	const addLike = async (_id) => {
 		let response = await fetch("api/addlike", {
@@ -49,8 +49,7 @@ const TweetCard = () => {
 		const json = await response.json();
 
 		if (response.ok) {
-			console.log("this worked from addLike", json);
-
+			// console.log("this worked from addLike", json);
 			// setUsers(json);
 		}
 	};
@@ -67,7 +66,7 @@ const TweetCard = () => {
 		const json = await response.json();
 
 		if (response.ok) {
-			console.log("this worked from DeleteTweet", json);
+			// console.log("this worked from DeleteTweet", json);
 		}
 		// console.log("sup");
 	};
@@ -127,13 +126,23 @@ const TweetCard = () => {
 										></FaArrowCircleUp>
 									</div>
 									<div className="col-1">{tweet.likes}</div>
-									<Link
-										to={`/${tweet._id}`}
-										state={{ tweet: tweet }}
-										className="col-2"
+
+									<button
+										type="button"
+										class="btn btn-primary"
+										data-bs-toggle="collapse"
+										data-bs-target={[
+											`#${tweet.author.username}`,
+										]}
 									>
-										Com
-									</Link>
+										Simple collapsible
+									</button>
+									<div
+										id={`${tweet.author.username}`}
+										class="collapse show"
+									>
+										sup
+									</div>
 
 									<small className="col-7 d-flex justify-content-end">
 										{formatDistanceToNow(

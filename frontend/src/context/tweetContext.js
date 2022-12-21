@@ -34,7 +34,7 @@ const TweetContextProvider = (props) => {
 		const json = await response;
 
 		if (response.ok) {
-			console.log(json);
+			// console.log(json);
 		}
 	};
 

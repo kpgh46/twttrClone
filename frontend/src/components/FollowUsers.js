@@ -36,11 +36,11 @@ const FollowUsers = () => {
 				const unFollowedUsers = findUnqiue(loggedInFollows, allUsers);
 
 				// console.log(unFollowedUsers);
-				console.log("unfollowed users:", unFollowedUsers);
+				// console.log("unfollowed users:", unFollowedUsers);
 				setUsers(unFollowedUsers);
 			}
 		};
-		console.log("fetch users ran");
+		// console.log("fetch users ran");
 
 		fetchAllUsers();
 	}, [render]);
@@ -58,7 +58,7 @@ const FollowUsers = () => {
 		const json = await response.json();
 
 		if (response.ok) {
-			console.log("this worked from ClickFOllow", json);
+			// console.log("this worked from ClickFOllow", json);
 			setUser(json);
 			localStorage.setItem("user", JSON.stringify(json));
 
