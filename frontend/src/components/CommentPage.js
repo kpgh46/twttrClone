@@ -16,7 +16,7 @@ const CommentPage = (props) => {
 			},
 		});
 
-		const json = await response.json();
+		// const json = await response.json();
 
 		if (response.ok) {
 			console.log(props.allComments);
@@ -24,6 +24,7 @@ const CommentPage = (props) => {
 	};
 
 	//filter comments for specific tweet
+	// eslint-disable-next-line array-callback-return
 	let tweetComments = props.allComments.filter((comment) => {
 		if (comment.tweet === props.tweetId) {
 			return comment;

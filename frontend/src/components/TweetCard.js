@@ -1,23 +1,20 @@
 import React, { useState } from "react";
-import Card from "react-bootstrap/Card";
+
 import Toast from "react-bootstrap/Toast";
 import { useContext, useEffect } from "react";
 import { authContext } from "../context/authContext";
 import { TweetContext } from "../context/tweetContext";
 import formatDistanceToNow from "date-fns/formatDistanceToNow";
 import { FaArrowCircleUp } from "react-icons/fa";
-import ToastHeader from "react-bootstrap/ToastHeader";
-import CloseButton from "react-bootstrap/CloseButton";
+
 import { AiFillCloseCircle } from "react-icons/ai";
 import { BsPersonBoundingBox } from "react-icons/bs";
 import CommentPage from "./CommentPage";
-import { Link } from "react-router-dom";
 
 const TweetCard = () => {
 	const { loggedInUser } = useContext(authContext);
 	const { tweets, setTweets } = useContext(TweetContext);
 	const [allComments, setAllComments] = useState(null);
-	const [render, setRender] = useState(true);
 
 	useEffect(() => {
 		const fetchTweets = async () => {
@@ -50,7 +47,7 @@ const TweetCard = () => {
 				"Content-Type": "application/json",
 			},
 		});
-		const json = await response.json();
+		// const json = await response.json();
 
 		if (response.ok) {
 			// console.log("this worked from addLike", json);
@@ -67,7 +64,7 @@ const TweetCard = () => {
 				"Content-Type": "application/json",
 			},
 		});
-		const json = await response.json();
+		// const json = await response.json();
 
 		if (response.ok) {
 			// console.log("this worked from DeleteTweet", json);
@@ -98,6 +95,7 @@ const TweetCard = () => {
 											marginRight: "7px",
 											borderRadius: "5px",
 											border: ".5px solid",
+											alt: "profile image",
 										}}
 									></img>
 								)}
@@ -124,22 +122,18 @@ const TweetCard = () => {
 							/>
 							<div className="container m-1">
 								<div className="row">
-									<div className="col-1">
+									<div className="col-2 d-flex justify-content-end pt-1 ">
 										<FaArrowCircleUp
 											onClick={() => addLike(tweet._id)}
 										></FaArrowCircleUp>
 									</div>
-									<div className="col-1">{tweet.likes}</div>
+									<div className="col-2 d-flex justify-content-start ps-0">
+										{tweet.likes}
+									</div>
 
-									<small className="col-7 d-flex justify-content-end">
-										{formatDistanceToNow(
-											new Date(tweet.createdAt),
-											{ addSuffix: true }
-										)}
-									</small>
 									<button
 										type="button"
-										class="btn btn-primary btn-block shadow-none"
+										class="btn btn-primary btn-block shadow-none col-4 pt-0"
 										style={{
 											backgroundColor: "white",
 											color: "black",
@@ -152,6 +146,12 @@ const TweetCard = () => {
 									>
 										Comments
 									</button>
+									<small className="col-4 d-flex justify-content-end pt-0">
+										{formatDistanceToNow(
+											new Date(tweet.createdAt),
+											{ addSuffix: true }
+										)}
+									</small>
 									<div
 										id={`${tweet.author.username}${index}`}
 										class="collapse show"

@@ -31,7 +31,7 @@ const TweetContextProvider = (props) => {
 				Authorization: `Bearer ${loggedInUser.token}`,
 			},
 		});
-		const json = await response;
+		// const json = await response;
 
 		if (response.ok) {
 			// console.log(json);
