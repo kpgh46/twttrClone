@@ -143,6 +143,7 @@ const TweetCard = () => {
 											border: "none",
 										}}
 										data-bs-toggle="collapse"
+										aria-expanded="false"
 										data-bs-target={[
 											`#${tweet.author.username}${index}`,
 										]}
@@ -158,7 +159,7 @@ const TweetCard = () => {
 									</small>
 									<div
 										id={`${tweet.author.username}${index}`}
-										class="collapse show"
+										class="collapse"
 									>
 										<CommentPage
 											tweetId={tweet._id}
