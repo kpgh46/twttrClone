@@ -18,7 +18,7 @@ const signUp = async (req, res) => {
 	const exists = await User.findOne({ username });
 
 	if (exists) {
-		return res.status(400).json({ error: `user already exists ${exists}` });
+		return res.status(400).json({ error: `User already exists` });
 	}
 
 	//try to create the user in database
@@ -70,18 +70,18 @@ const logIn = async (req, res) => {
 	const user = await User.findOne({ username });
 
 	if (!user) {
-		res.status(401).json({ error: "wrong username" });
+		return res.status(401).json({ error: "User does not exist" });
 	}
 
-	const match = bcrypt.compare(password, user.password);
-	if (match) {
-		try {
-			const token = await createToken(user._id);
-			res.status(200).json({ user, token });
-		} catch (error) {
-			return res.status(400).json({ error: error.message });
-		}
+	const match = await bcrypt.compare(password, user.password);
+
+	if (!match) {
+		return res.status(400).json({ error: "Incorrect Password" });
 	}
+
+	//if username and password match database
+	const token = await createToken(user._id);
+	res.status(200).json({ user, token });
 };
 
 const getAllUsers = async (req, res) => {

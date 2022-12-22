@@ -47,7 +47,7 @@ const CommentPage = (props) => {
 			></input>
 			{tweetComments &&
 				tweetComments.map((comment) => (
-					<div className="text-start ms-2 mt-1">
+					<div className="text-start ms-2 mt-1 border-bottom">
 						{comment.author.username}: {comment.text}
 					</div>
 				))}

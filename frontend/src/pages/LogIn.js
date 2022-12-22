@@ -1,12 +1,12 @@
 import React from "react";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { authContext } from "../context/authContext";
 import Navbar from "../components/Navbar";
 
 const LogIn = () => {
 	let [username, setUserName] = useState("");
 	let [password, setPassword] = useState("");
-	let [error, setError] = useState(null);
+	let [error, setError] = useState("");
 	let { loggedInUser, setUser } = useContext(authContext);
 
 	const clickLogIn = async (e) => {
@@ -25,13 +25,23 @@ const LogIn = () => {
 		const json = await response.json();
 
 		if (!response.ok) {
-			setError(json);
+			setError(json.error);
+			console.log(error);
 		}
 		if (response.ok) {
 			localStorage.setItem("user", JSON.stringify(json));
 			setUser(json);
 		}
 	};
+
+	useEffect(() => {
+		if (!error) {
+			return;
+		}
+		setTimeout(() => {
+			setError(null);
+		}, 3000);
+	}, [error]);
 
 	return (
 		<div className="container w-75">
@@ -51,9 +61,7 @@ const LogIn = () => {
 						aria-describedby="emailHelp"
 						onChange={(e) => setUserName(e.target.value)}
 					></input>
-					<div id="emailHelp" class="form-text">
-						Could be an error message here
-					</div>
+					<div id="emailHelp" class="form-text"></div>
 				</div>
 				<div class="mb-3">
 					<label for="exampleInputPassword1" class="form-label">
@@ -70,6 +78,7 @@ const LogIn = () => {
 				<button type="submit" class="btn btn-primary mb-2">
 					Submit
 				</button>
+				{error && <div style={{ color: "red" }}>{error}</div>}
 			</form>
 		</div>
 	);

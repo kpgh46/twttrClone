@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { authContext } from "../context/authContext";
 import Navbar from "../components/Navbar";
 import Button from "react-bootstrap/Button";
@@ -39,6 +39,15 @@ const SignUp = () => {
 		}
 	};
 
+	useEffect(() => {
+		if (!error) {
+			return;
+		}
+		setTimeout(() => {
+			setError(null);
+		}, 3000);
+	}, [error]);
+
 	return (
 		<div>
 			<Navbar />
@@ -57,9 +66,7 @@ const SignUp = () => {
 						aria-describedby="emailHelp"
 						onChange={(e) => setUserName(e.target.value)}
 					></input>
-					<div id="emailHelp" class="form-text">
-						Could be an error message here
-					</div>
+					<div id="emailHelp" class="form-text"></div>
 				</div>
 				<div class="mb-3">
 					<label for="exampleInputPassword1" class="form-label">
@@ -69,6 +76,7 @@ const SignUp = () => {
 						type="password"
 						class="form-control"
 						onChange={(e) => setPassword(e.target.value)}
+						required
 					></input>
 				</div>
 				<div class="mb-3">
@@ -85,9 +93,9 @@ const SignUp = () => {
 				<button type="submit" class="btn btn-primary mb-2">
 					Submit
 				</button>
+				{error && <div style={{ color: "red" }}>{error.error}</div>}
+				{loggedInUser && <div>{loggedInUser.user.username}</div>}
 			</form>
-			{error && <div>{error.error}</div>}
-			{loggedInUser && <div>{loggedInUser.user.username}</div>}
 		</div>
 	);
 };
