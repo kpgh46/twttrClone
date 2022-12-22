@@ -11,7 +11,7 @@ const CreateTweet = () => {
 	const [caption, setCaption] = React.useState("");
 
 	const { addTweet } = useContext(TweetContext);
-	const { loggedInUser } = useContext(authContext);
+	// const { loggedInUser } = useContext(authContext);
 
 	return (
 		<div className="container">
@@ -24,7 +24,7 @@ const CreateTweet = () => {
 						<Form.Control
 							as="textarea"
 							placeholder=""
-							style={{ height: "100px" }}
+							style={{ height: "200px" }}
 							onChange={(e) => setCaption(e.target.value)}
 						/>
 					</FloatingLabel>

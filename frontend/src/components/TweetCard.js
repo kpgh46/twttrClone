@@ -39,7 +39,7 @@ const TweetCard = () => {
 			// console.log(loggedInUser);
 			// setRender((render) => !render);
 		}
-	}, [render]);
+	}, []);
 
 	const addLike = async (_id) => {
 		let response = await fetch("api/addlike", {
@@ -131,15 +131,26 @@ const TweetCard = () => {
 									</div>
 									<div className="col-1">{tweet.likes}</div>
 
+									<small className="col-7 d-flex justify-content-end">
+										{formatDistanceToNow(
+											new Date(tweet.createdAt),
+											{ addSuffix: true }
+										)}
+									</small>
 									<button
 										type="button"
-										class="btn btn-primary"
+										class="btn btn-primary btn-block shadow-none"
+										style={{
+											backgroundColor: "white",
+											color: "black",
+											border: "none",
+										}}
 										data-bs-toggle="collapse"
 										data-bs-target={[
 											`#${tweet.author.username}${index}`,
 										]}
 									>
-										Simple collapsible
+										Comments
 									</button>
 									<div
 										id={`${tweet.author.username}${index}`}
@@ -150,13 +161,6 @@ const TweetCard = () => {
 											allComments={allComments}
 										/>
 									</div>
-
-									<small className="col-7 d-flex justify-content-end">
-										{formatDistanceToNow(
-											new Date(tweet.createdAt),
-											{ addSuffix: true }
-										)}
-									</small>
 								</div>
 							</div>
 						</div>
