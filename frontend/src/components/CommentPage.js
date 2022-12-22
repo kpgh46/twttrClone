@@ -32,16 +32,25 @@ const CommentPage = (props) => {
 	});
 
 	return (
-		<div>
-			<button onClick={() => addComment(props.tweetId, comment)}>
-				Add Comment
+		<div className="input-group mb-3 row h-50">
+			<button
+				onClick={() => addComment(props.tweetId, comment)}
+				className="btn btn-outline-secondary col-2 ms-2"
+				type="button"
+			>
+				Add
 			</button>
 			<input
 				type="text"
 				onChange={(e) => setComment(e.target.value)}
+				className="form-control rounded"
 			></input>
 			{tweetComments &&
-				tweetComments.map((comment) => <div>{comment.text}</div>)}
+				tweetComments.map((comment) => (
+					<div className="text-start ms-2 mt-1">
+						{comment.author.username}: {comment.text}
+					</div>
+				))}
 		</div>
 	);
 };

@@ -9,6 +9,8 @@ import { FaArrowCircleUp } from "react-icons/fa";
 
 import { AiFillCloseCircle } from "react-icons/ai";
 import { BsPersonBoundingBox } from "react-icons/bs";
+import { MdKeyboardArrowDown } from "react-icons/md";
+
 import CommentPage from "./CommentPage";
 
 const TweetCard = () => {
@@ -120,6 +122,7 @@ const TweetCard = () => {
 								className="img-thumbnail"
 								alt=""
 							/>
+
 							<div className="container m-1">
 								<div className="row">
 									<div className="col-2 d-flex justify-content-end pt-1 ">
@@ -144,8 +147,9 @@ const TweetCard = () => {
 											`#${tweet.author.username}${index}`,
 										]}
 									>
-										Comments
+										Comments {<MdKeyboardArrowDown />}
 									</button>
+
 									<small className="col-4 d-flex justify-content-end pt-0">
 										{formatDistanceToNow(
 											new Date(tweet.createdAt),
