@@ -7,27 +7,38 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 const CreateTweet = () => {
 	const [caption, setCaption] = React.useState("");
+	const [photo, setPhoto] = React.useState("");
 
 	const { addTweet } = useContext(TweetContext);
 	// const { loggedInUser } = useContext(authContext);
+	console.log(photo);
 
 	return (
 		<div className="container">
 			<div className="row">
-				<Form onClick={() => addTweet(caption)}>
-					<FloatingLabel
-						controlId="floatingTextarea2"
-						label="What are you thinking about?"
-					>
-						<Form.Control
-							as="textarea"
-							placeholder=""
-							style={{ height: "200px" }}
+				<form onClick={() => addTweet(caption, photo)}>
+					<div class="form-floating">
+						<textarea
+							class="form-control"
+							placeholder="Leave a comment here"
+							id="floatingTextarea"
 							onChange={(e) => setCaption(e.target.value)}
-						/>
-					</FloatingLabel>
+						></textarea>
+						<label for="floatingTextarea">
+							What what you thinking about?
+						</label>
+					</div>
+					<div class="form-floating">
+						<textarea
+							class="form-control"
+							placeholder="URL"
+							id="floatingUrl"
+							onChange={(e) => setPhoto(e.target.value)}
+						></textarea>
+						<label for="floatingUrl">Add a URL</label>
+					</div>
 					<button>Submit</button>
-				</Form>
+				</form>
 			</div>
 		</div>
 	);

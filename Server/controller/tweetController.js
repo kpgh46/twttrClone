@@ -31,18 +31,20 @@ const getTweets = async (req, res) => {
 
 const createTweet = async (req, res) => {
 	// get variables from body of request
-	const { caption, likes, retweets, author } = req.body;
+	const { caption, photo, likes, retweets, author } = req.body;
 
 	// async function to create a Tweet in db
 	try {
 		const user_id = req.user._id;
 		let tweet = await Tweet.create({
 			caption,
+			photo,
 			likes: 0,
 			retweets: 0,
 			author: user_id,
 			user_id,
 		});
+		console.log(tweet);
 		//if successful, send success status and json object back
 		res.status(200).json(tweet);
 

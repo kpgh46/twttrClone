@@ -113,15 +113,17 @@ const TweetCard = () => {
 								)}
 							</Toast.Header>
 							{tweet.caption}
-							<img
-								src="https://www.wkbn.com/wp-content/uploads/sites/48/2021/06/football-and-football-field-2.jpg?w=960&h=540&crop=1"
-								// style={{
-								// 	maxHeight: "100px",
-								// 	maxWidth: "100px",
-								// }}
-								className="img-thumbnail"
-								alt=""
-							/>
+							{tweet.photo && (
+								<img
+									src={tweet.photo}
+									// style={{
+									// 	maxHeight: "100px",
+									// 	maxWidth: "100px",
+									// }}
+									className="img-thumbnail"
+									alt=""
+								/>
+							)}
 
 							<div className="container m-1">
 								<div className="row">
