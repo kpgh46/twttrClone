@@ -77,7 +77,10 @@ const TweetCard = () => {
 		<div>
 			{tweets &&
 				tweets.map((tweet, index) => (
-					<Toast className="container mb-3">
+					<Toast
+						className="container-lg mb-3"
+						style={{ width: "600px" }}
+					>
 						<div key={tweet._id}>
 							<Toast.Header closeButton={false}>
 								{!tweet.author.url ? (
