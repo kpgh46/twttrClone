@@ -9,11 +9,11 @@ const getTweets = async (req, res) => {
 		const userFollowerTweets = await Tweet.find({
 			author: { $in: currentUser.follows },
 		})
-			.sort({ createdAt: 1 })
+			.sort({ createdAt: -1 })
 			.populate("author");
 
 		const userTweets = await Tweet.find({ author: req.user._id })
-			.sort({ createdAt: 1 })
+			.sort({ createdAt: -1 })
 			.populate("author");
 
 		const allComments = await Comment.find({}).populate("author");

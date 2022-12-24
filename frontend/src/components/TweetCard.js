@@ -115,18 +115,20 @@ const TweetCard = () => {
 									<div></div>
 								)}
 							</Toast.Header>
-							{tweet.caption}
-							{tweet.photo && (
-								<img
-									src={tweet.photo}
-									// style={{
-									// 	maxHeight: "100px",
-									// 	maxWidth: "100px",
-									// }}
-									className="img-thumbnail"
-									alt=""
-								/>
-							)}
+							<div className="d-flex flex-column m-2">
+								<h6>{tweet.caption}</h6>
+								{tweet.photo && (
+									<img
+										src={tweet.photo}
+										// style={{
+										// 	maxHeight: "600px",
+										// 	maxWidth: "100px",
+										// }}
+										className="img-thumbnail"
+										alt=""
+									/>
+								)}
+							</div>
 
 							<div className="container m-1">
 								<div className="row">
