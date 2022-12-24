@@ -16,26 +16,27 @@ const CreateTweet = () => {
 	return (
 		<div className="container">
 			<div className="row">
-				<form onClick={() => addTweet(caption, photo)}>
+				<form onSubmit={() => addTweet(caption, photo)}>
 					<div class="form-floating">
 						<textarea
-							class="form-control"
+							className="form-control"
 							placeholder="Leave a comment here"
 							id="floatingTextarea"
+							style={{ height: "300px" }}
 							onChange={(e) => setCaption(e.target.value)}
 						></textarea>
 						<label for="floatingTextarea">
 							What what you thinking about?
 						</label>
 					</div>
-					<div class="form-floating">
-						<textarea
+					<div className="form-floating mt-2">
+						<input
 							class="form-control"
 							placeholder="URL"
 							id="floatingUrl"
 							onChange={(e) => setPhoto(e.target.value)}
-						></textarea>
-						<label for="floatingUrl">Add a URL</label>
+						></input>
+						<label for="floatingUrl">Add a URL (Optional)</label>
 					</div>
 					<button>Submit</button>
 				</form>
