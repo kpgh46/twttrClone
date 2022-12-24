@@ -35,9 +35,11 @@ const FollowUsers = () => {
 				let allUsers = json.allUsers;
 				const unFollowedUsers = findUnqiue(loggedInFollows, allUsers);
 
-				// console.log(unFollowedUsers);
-				// console.log("unfollowed users:", unFollowedUsers);
-				setUsers(unFollowedUsers);
+				const filteredUnfollowed = unFollowedUsers.filter(
+					(user) => user._id !== loggedInUser.user._id
+				);
+
+				setUsers(filteredUnfollowed);
 			}
 		};
 		// console.log("fetch users ran");

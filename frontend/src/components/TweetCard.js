@@ -115,8 +115,10 @@ const TweetCard = () => {
 									<div></div>
 								)}
 							</Toast.Header>
-							<div className="d-flex flex-column m-2">
-								<h6>{tweet.caption}</h6>
+							<div className="d-flex flex-column mb-2 mt-2">
+								<div style={{ fontSize: "17px" }}>
+									{tweet.caption}
+								</div>
 								{tweet.photo && (
 									<img
 										src={tweet.photo}
