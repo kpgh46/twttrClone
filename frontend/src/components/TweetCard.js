@@ -17,6 +17,7 @@ const TweetCard = () => {
 	const { loggedInUser } = useContext(authContext);
 	const { tweets, setTweets } = useContext(TweetContext);
 	const [allComments, setAllComments] = useState(null);
+	const [render, setRender] = useState(false);
 
 	useEffect(() => {
 		const fetchTweets = async () => {
@@ -35,10 +36,8 @@ const TweetCard = () => {
 
 		if (loggedInUser) {
 			fetchTweets();
-			// console.log(loggedInUser);
-			// setRender((render) => !render);
 		}
-	}, []);
+	}, [render]);
 
 	const addLike = async (_id) => {
 		let response = await fetch("api/addlike", {
@@ -52,8 +51,7 @@ const TweetCard = () => {
 		// const json = await response.json();
 
 		if (response.ok) {
-			// console.log("this worked from addLike", json);
-			// setUsers(json);
+			setRender((r) => !r);
 		}
 	};
 
@@ -69,9 +67,8 @@ const TweetCard = () => {
 		// const json = await response.json();
 
 		if (response.ok) {
-			// console.log("this worked from DeleteTweet", json);
+			setRender((r) => !r);
 		}
-		// console.log("sup");
 	};
 	return (
 		<div>
