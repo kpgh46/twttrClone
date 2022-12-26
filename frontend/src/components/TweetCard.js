@@ -15,29 +15,13 @@ import CommentPage from "./CommentPage";
 
 const TweetCard = () => {
 	const { loggedInUser } = useContext(authContext);
-	const { tweets, setTweets } = useContext(TweetContext);
-	const [allComments, setAllComments] = useState(null);
-	const [render, setRender] = useState(false);
+	const { tweets, getTweets, comments } = useContext(TweetContext);
 
 	useEffect(() => {
-		const fetchTweets = async () => {
-			let response = await fetch("api/tweets", {
-				headers: {
-					Authorization: `Bearer ${loggedInUser.token}`,
-				},
-			});
-			let json = await response.json();
-
-			if (response.ok) {
-				setTweets(json.allTweets);
-				setAllComments(json.allComments);
-			}
-		};
-
 		if (loggedInUser) {
-			fetchTweets();
+			getTweets(loggedInUser.token);
 		}
-	}, [render]);
+	}, [tweets]);
 
 	const addLike = async (_id) => {
 		let response = await fetch("api/addlike", {
@@ -48,11 +32,6 @@ const TweetCard = () => {
 				"Content-Type": "application/json",
 			},
 		});
-		// const json = await response.json();
-
-		if (response.ok) {
-			setRender((r) => !r);
-		}
 	};
 
 	const deleteTweet = async (_id) => {
@@ -64,11 +43,6 @@ const TweetCard = () => {
 				"Content-Type": "application/json",
 			},
 		});
-		// const json = await response.json();
-
-		if (response.ok) {
-			setRender((r) => !r);
-		}
 	};
 	return (
 		<div>
@@ -90,6 +64,7 @@ const TweetCard = () => {
 									/>
 								) : (
 									<img
+										alt="profile image"
 										src={tweet.author.url}
 										style={{
 											height: "30px",
@@ -97,7 +72,6 @@ const TweetCard = () => {
 											marginRight: "7px",
 											borderRadius: "5px",
 											border: ".5px solid",
-											alt: "profile image",
 										}}
 									></img>
 								)}
@@ -119,10 +93,6 @@ const TweetCard = () => {
 								{tweet.photo && (
 									<img
 										src={tweet.photo}
-										// style={{
-										// 	maxHeight: "600px",
-										// 	maxWidth: "100px",
-										// }}
 										className="img-thumbnail"
 										alt=""
 									/>
@@ -169,7 +139,7 @@ const TweetCard = () => {
 									>
 										<CommentPage
 											tweetId={tweet._id}
-											allComments={allComments}
+											allComments={comments}
 										/>
 									</div>
 								</div>

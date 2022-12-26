@@ -3,8 +3,6 @@ import CreateTweet from "../components/CreateTweet";
 import TweetCard from "../components/TweetCard";
 import NavigationBar from "../components/Navbar";
 import FollowUsers from "../components/FollowUsers";
-import Header from "../components/Header";
-import Card from "react-bootstrap/Card";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 

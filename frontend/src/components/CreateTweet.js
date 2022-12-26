@@ -10,8 +10,6 @@ const CreateTweet = () => {
 	const [photo, setPhoto] = React.useState("");
 
 	const { addTweet } = useContext(TweetContext);
-	// const { loggedInUser } = useContext(authContext);
-	console.log(photo);
 
 	return (
 		<div className="container">

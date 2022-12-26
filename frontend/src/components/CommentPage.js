@@ -15,12 +15,7 @@ const CommentPage = (props) => {
 				"Content-Type": "application/json",
 			},
 		});
-
-		// const json = await response.json();
-
-		if (response.ok) {
-			console.log(props.allComments);
-		}
+		document.getElementById("commentInput").value = "";
 	};
 
 	//filter comments for specific tweet
@@ -44,6 +39,7 @@ const CommentPage = (props) => {
 				type="text"
 				onChange={(e) => setComment(e.target.value)}
 				className="form-control rounded"
+				id="commentInput"
 			></input>
 			{tweetComments &&
 				tweetComments.map((comment) => (

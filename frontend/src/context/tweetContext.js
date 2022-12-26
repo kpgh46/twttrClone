@@ -6,6 +6,8 @@ export const TweetContext = createContext();
 
 const TweetContextProvider = (props) => {
 	const [tweets, setTweets] = useState([]);
+	const [comments, setComments] = useState([]);
+
 	const { loggedInUser } = useContext(authContext);
 
 	let getTweets = async (token) => {
@@ -17,7 +19,8 @@ const TweetContextProvider = (props) => {
 		let json = await response.json();
 
 		if (response.ok) {
-			setTweets(json);
+			setTweets(json.allTweets);
+			setComments(json.allComments);
 		}
 	};
 
@@ -31,22 +34,22 @@ const TweetContextProvider = (props) => {
 				Authorization: `Bearer ${loggedInUser.token}`,
 			},
 		});
-		// const json = await response;
-
-		if (response.ok) {
-			// console.log(json);
-		}
 	};
 
 	const resetTweets = () => {
 		setTweets(null);
 	};
 
-	//delete tweet
-
 	return (
 		<TweetContext.Provider
-			value={{ tweets, addTweet, setTweets, getTweets, resetTweets }}
+			value={{
+				tweets,
+				addTweet,
+				setTweets,
+				getTweets,
+				resetTweets,
+				comments,
+			}}
 		>
 			{props.children}
 		</TweetContext.Provider>

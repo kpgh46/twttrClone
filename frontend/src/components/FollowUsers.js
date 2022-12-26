@@ -42,7 +42,6 @@ const FollowUsers = () => {
 				setUsers(filteredUnfollowed);
 			}
 		};
-		// console.log("fetch users ran");
 
 		fetchAllUsers();
 	}, [render]);
