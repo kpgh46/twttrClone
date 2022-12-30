@@ -28,10 +28,26 @@ const NavigationBar = () => {
 				<Navbar.Text>
 					{!loggedInUser && (
 						<div>
-							<Button style={{ color: "white" }} href="/signup">
+							<Button
+								style={{
+									backgroundColor: "rgb(66 103 178)",
+									color: "white",
+									border: "1px solid rgb(66 103 178)",
+									borderRadius: "5px",
+								}}
+								href="/signup"
+							>
 								Sign Up
 							</Button>{" "}
-							<Button style={{ color: "white" }} href="/login">
+							<Button
+								style={{
+									backgroundColor: "rgb(66 103 178)",
+									color: "white",
+									border: "1px solid rgb(66 103 178)",
+									borderRadius: "5px",
+								}}
+								href="/login"
+							>
 								Log In
 							</Button>{" "}
 						</div>

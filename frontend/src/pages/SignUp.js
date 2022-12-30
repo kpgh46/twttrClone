@@ -90,7 +90,16 @@ const SignUp = () => {
 					></input>
 				</div>
 
-				<button type="submit" class="btn btn-primary mb-2">
+				<button
+					type="submit"
+					class="btn btn-primary mb-2"
+					style={{
+						backgroundColor: "rgb(66 103 178)",
+						color: "white",
+						border: "1px solid rgb(66 103 178)",
+						borderRadius: "5px",
+					}}
+				>
 					Submit
 				</button>
 				{error && <div style={{ color: "red" }}>{error.error}</div>}
