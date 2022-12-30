@@ -15,7 +15,7 @@ import CommentPage from "./CommentPage";
 
 const TweetCard = () => {
 	const { loggedInUser } = useContext(authContext);
-	const { tweets, getTweets, comments } = useContext(TweetContext);
+	const { tweets, setTweets, getTweets, comments } = useContext(TweetContext);
 
 	useEffect(() => {
 		if (loggedInUser) {
@@ -60,6 +60,7 @@ const TweetCard = () => {
 											height: "30px",
 											width: "35px",
 											paddingRight: "9px",
+											color: "black",
 										}}
 									/>
 								) : (
@@ -75,7 +76,10 @@ const TweetCard = () => {
 										}}
 									></img>
 								)}
-								<strong className="me-auto fs-5">
+								<strong
+									className="me-auto fs-5"
+									style={{ color: "black" }}
+								>
 									{tweet.author.username}
 								</strong>
 								{loggedInUser.user._id === tweet.author._id ? (

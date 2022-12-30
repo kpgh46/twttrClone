@@ -38,11 +38,11 @@ const CreateTweet = () => {
 					</div>
 					<button
 						style={{
-							color: "blue",
+							color: "rgb(66 103 178)",
 							borderRadius: "5px",
 							backgroundColor: "white",
 							marginTop: "5px",
-							border: ".5px solid blue",
+							border: ".5px solid rgb(66 103 178)",
 							height: "40px",
 							width: "120px",
 						}}

@@ -20,9 +20,10 @@ const NavigationBar = () => {
 	return (
 		<Navbar>
 			<Container className="border-bottom">
-				<Navbar.Brand href="#">
+				<Navbar.Brand style={{ color: "rgb(66 103 178)" }} href="#">
 					{" "}
-					<TfiThought /> ShareThoughts
+					<TfiThought style={{ color: "rgb(66 103 178)" }} />{" "}
+					ShareThoughts
 				</Navbar.Brand>
 				<Navbar.Text>
 					{!loggedInUser && (
@@ -40,9 +41,18 @@ const NavigationBar = () => {
 							<div className="m-2">
 								{loggedInUser.user.username}
 							</div>
-							<Button variant="outline-primary" onClick={logout}>
+							<button
+								class="btn-primary"
+								style={{
+									backgroundColor: "rgb(66 103 178)",
+									color: "white",
+									border: "1px solid rgb(66 103 178)",
+									borderRadius: "5px",
+								}}
+								onClick={logout}
+							>
 								LogOut
-							</Button>
+							</button>
 						</div>
 					)}
 				</Navbar.Text>
