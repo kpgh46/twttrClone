@@ -24,7 +24,7 @@ const CreateTweet = () => {
 							onChange={(e) => setCaption(e.target.value)}
 						></textarea>
 						<label for="floatingTextarea">
-							What what you thinking about?
+							Whatcha thinking about?
 						</label>
 					</div>
 					<div className="form-floating mt-2">
@@ -34,7 +34,9 @@ const CreateTweet = () => {
 							id="floatingUrl"
 							onChange={(e) => setPhoto(e.target.value)}
 						></input>
-						<label for="floatingUrl">Add a URL (Optional)</label>
+						<label for="floatingUrl">
+							URL for an image (Optional)
+						</label>
 					</div>
 					<button
 						style={{
