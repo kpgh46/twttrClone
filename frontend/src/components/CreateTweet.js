@@ -24,7 +24,7 @@ const CreateTweet = () => {
 							onChange={(e) => setCaption(e.target.value)}
 						></textarea>
 						<label for="floatingTextarea">
-							Whatcha thinking about?
+							Thinking about something?
 						</label>
 					</div>
 					<div className="form-floating mt-2">
