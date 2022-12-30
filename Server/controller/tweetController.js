@@ -17,11 +17,19 @@ const getTweets = async (req, res) => {
 			.populate("author");
 
 		const allComments = await Comment.find({}).populate("author");
+		// console.log(userTweets);
 
 		const allTweets = [...userTweets, ...userFollowerTweets];
+		const sortedAllTweets = allTweets.sort((b, a) => {
+			if (a.createdAt > b.createdAt) {
+				return 1;
+			} else {
+				return -1;
+			}
+		});
 
 		res.status(200).json({
-			allTweets: allTweets,
+			allTweets: sortedAllTweets,
 			allComments: allComments,
 		});
 	} catch (error) {

@@ -4,8 +4,8 @@ import { authContext } from "../context/authContext";
 import Navbar from "../components/Navbar";
 
 const LogIn = () => {
-	let [username, setUserName] = useState("");
-	let [password, setPassword] = useState("");
+	let [username, setUserName] = useState("GuestUser1");
+	let [password, setPassword] = useState("abc");
 	let [error, setError] = useState("");
 	let { loggedInUser, setUser } = useContext(authContext);
 
@@ -60,6 +60,7 @@ const LogIn = () => {
 						id="exampleInputEmail1"
 						aria-describedby="emailHelp"
 						onChange={(e) => setUserName(e.target.value)}
+						value={username}
 					></input>
 					<div id="emailHelp" class="form-text"></div>
 				</div>
@@ -72,11 +73,12 @@ const LogIn = () => {
 						class="form-control"
 						id="exampleInputPassword1"
 						onChange={(e) => setPassword(e.target.value)}
+						value={password}
 					></input>
 				</div>
 
 				<button type="submit" class="btn btn-primary mb-2">
-					Submit
+					Log In
 				</button>
 				{error && <div style={{ color: "red" }}>{error}</div>}
 			</form>

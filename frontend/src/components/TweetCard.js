@@ -68,7 +68,7 @@ const TweetCard = () => {
 										alt="profile image"
 										src={tweet.author.url}
 										style={{
-											height: "30px",
+											height: "35px",
 											width: "35px",
 											marginRight: "7px",
 											borderRadius: "5px",
