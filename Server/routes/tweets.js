@@ -11,7 +11,7 @@ const requireAuth = require("../middleware/requireAuth");
 
 // const newTweet = require("../constructors/newTweet");
 
-router.use(requireAuth);
+// router.use(requireAuth);
 
 //get all tweets
 router.get("/api/tweets", getTweets);
