@@ -67,7 +67,7 @@ const NavigationBar = () => {
 								}}
 								onClick={logout}
 							>
-								Log Out
+								LogOut
 							</button>
 						</div>
 					)}

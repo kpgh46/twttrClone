@@ -1,0 +1,20 @@
+{
+  "name": "twttrclone",
+  "version": "1.0.0",
+  "description": "test",
+  "main": "./Server/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "cd ./server && node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kpgh46/twttrClone.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kpgh46/twttrClone/issues"
+  },
+  "homepage": "https://github.com/kpgh46/twttrClone#readme"
+}
