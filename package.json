@@ -1,11 +1,11 @@
 {
   "name": "socialapp",
   "version": "1.0.0",
-  "description": "some description",
-  "main": "./server/index.js",
+  "description": "social media app",
+  "main": "./Server/server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "cd ./server && node index.js"
+    "start": "cd ./Server && node server.js"
   },
   "engines": {
     "node": "16.8.0"
