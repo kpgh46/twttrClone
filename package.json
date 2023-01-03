@@ -1,20 +1,16 @@
 {
-  "name": "twttrclone",
+  "name": "socialapp",
   "version": "1.0.0",
-  "description": "test",
-  "main": "./Server/server.js",
+  "description": "some description",
+  "main": "./server/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "cd ./server && node server.js"
+    "start": "cd ./server && node index.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/kpgh46/twttrClone.git"
+  "engines": {
+    "node": "16.8.0"
   },
+  "keywords": [],
   "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/kpgh46/twttrClone/issues"
-  },
-  "homepage": "https://github.com/kpgh46/twttrClone#readme"
+  "license": "ISC"
 }

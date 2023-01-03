@@ -15,6 +15,14 @@ const cookieParser = require("cookie-parser");
 
 const bodyParser = require("body-parser");
 
+// Serve the production build of the client application
+app.use(express.static(path.join(__dirname, "frontend/build")));
+
+// For any other routes, serve the index.html file from the client/build folder
+// app.get("*", (req, res) => {
+// 	res.sendFile(path.join(__dirname, "frontend/build", "index.html"));
+// });
+
 //middleware
 app.use(express.json());
 app.use((req, res, next) => {
@@ -52,7 +60,3 @@ mongoose
 	.catch((error) => {
 		console.log(error);
 	});
-
-// app.listen(4000, () => {
-// 	console.log("running on port 4000");
-// });
