@@ -7,14 +7,11 @@ const userRoutes = require("./routes/auth");
 const getUserRoutes = require("./routes/user");
 const mongoose = require("mongoose");
 const path = require("path");
-const requireAuth = require("./middleware/requireAuth");
-
-// Serve the production build of the client application
-app.use(express.static(path.join(__dirname, "frontend/build")));
+// const requireAuth = require("./middleware/requireAuth");
 
 // For any other routes, serve the index.html file from the client/build folder
 // app.get("*", (req, res) => {
-// 	res.sendFile(path.join(__dirname, "frontend/build", "index.html"));
+// 	res.sendFile(path.join("frontend/build", "index.html"));
 // });
 
 //middleware
@@ -23,8 +20,8 @@ app.use((req, res, next) => {
 	console.log(req.path, req.method);
 	next();
 });
-
-app.use(requireAuth);
+// Serve the production build of the client application
+app.use(express.static(path.join(__dirname, "frontend/build")));
 
 // app.use(
 // 	cors({
