@@ -7,13 +7,7 @@ const userRoutes = require("./routes/auth");
 const getUserRoutes = require("./routes/user");
 const mongoose = require("mongoose");
 const path = require("path");
-const session = require("express-session");
-const passport = require("passport");
-const LocalStrategy = require("passport-local");
-
-const cookieParser = require("cookie-parser");
-
-const bodyParser = require("body-parser");
+const requireAuth = require("./middleware/requireAuth");
 
 // Serve the production build of the client application
 app.use(express.static(path.join(__dirname, "frontend/build")));
@@ -29,6 +23,8 @@ app.use((req, res, next) => {
 	console.log(req.path, req.method);
 	next();
 });
+
+app.use(requireAuth);
 
 // app.use(
 // 	cors({
