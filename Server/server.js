@@ -10,9 +10,6 @@ const path = require("path");
 // const requireAuth = require("./middleware/requireAuth");
 
 // For any other routes, serve the index.html file from the client/build folder
-// app.get("*", (req, res) => {
-// 	res.sendFile(path.join("frontend/build", "index.html"));
-// });
 
 //middleware
 app.use(express.json());
@@ -21,7 +18,6 @@ app.use((req, res, next) => {
 	next();
 });
 // Serve the production build of the client application
-app.use(express.static(path.join(__dirname, "frontend/build")));
 
 // app.use(
 // 	cors({
@@ -46,10 +42,16 @@ app.use(getUserRoutes);
 mongoose
 	.connect(process.env.MONGO_URI)
 	.then(() => {
-		app.listen(process.env.PORT, () => {
+		app.listen(process.env.PORT || 4000, () => {
 			console.log("connected to db and listening on 4000");
 		});
 	})
 	.catch((error) => {
 		console.log(error);
 	});
+
+app.use(express.static(path.join(__dirname, "/frontend")));
+
+app.get("*", (req, res) => {
+	res.sendFile(path.join(__dirname, "/frontend/build", "index.html"));
+});
