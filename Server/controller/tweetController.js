@@ -17,7 +17,6 @@ const getTweets = async (req, res) => {
 			.populate("author");
 
 		const allComments = await Comment.find({}).populate("author");
-		// console.log(userTweets);
 
 		const allTweets = [...userTweets, ...userFollowerTweets];
 		const sortedAllTweets = allTweets.sort((b, a) => {
@@ -71,7 +70,7 @@ const addLike = async (req, res) => {
 		);
 
 		const currentUser = await User.findOne(req.user._id);
-		// console.log("From tweetController", currentUser);
+
 		const allTweets = await Tweet.find({
 			author: { $in: currentUser.follows },
 		}).populate("author");
@@ -103,7 +102,7 @@ const addComment = async (req, res) => {
 	try {
 		const currentUser = await User.findOne(req.user._id);
 		const currentTweet = await Tweet.findById(req.body.tweetId);
-		// console.log(currentUser, currentTweet, req.body.text);
+
 		const newComment = await Comment.create({
 			tweet: req.body.tweetId,
 			text: req.body.text,

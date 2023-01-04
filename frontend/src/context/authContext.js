@@ -24,13 +24,6 @@ const AuthContextProvider = (props) => {
 		}
 	}, []);
 
-	// useEffect(() => {
-	// 	localStorage.setItem("user", JSON.stringify(loggedInUser));
-	// 	// setUser(loggedInUser);
-	// }, []);
-
-	// console.log("From Context:", loggedInUser);
-
 	return (
 		<authContext.Provider
 			value={{ loggedInUser, setLoggedInUser, setUser, removeUser }}

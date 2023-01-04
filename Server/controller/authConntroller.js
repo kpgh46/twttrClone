@@ -12,7 +12,6 @@ const createToken = (_id) => {
 //sign up
 const signUp = async (req, res) => {
 	const { username, password, url } = req.body;
-	// console.log(username, password);
 
 	//check if username already exists in database
 	const exists = await User.findOne({ username });
@@ -60,7 +59,6 @@ const addFollow = async (req, res) => {
 			res.status(200).json({ user: updatedRecord, token });
 		}
 	);
-	//update user
 };
 
 const logIn = async (req, res) => {
@@ -92,15 +90,5 @@ const getAllUsers = async (req, res) => {
 		res.status(400).json({ error: error.message });
 	}
 };
-
-// const getUnfollowedUsers = async (req, res) => {
-// 	try{
-// 	const currentUser = await User.findOne(req.user._id);
-
-// 	}
-// 	catch(error){
-
-// 	}
-// }
 
 module.exports = { signUp, logIn, getAllUsers, addFollow };
