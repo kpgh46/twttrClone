@@ -30,7 +30,7 @@ const FollowUsers = () => {
 				},
 			});
 			const json = await response.json();
-
+			//filters out already followed users
 			if (response.ok) {
 				let loggedInFollows = loggedInUser.user.follows;
 				let allUsers = json.allUsers;
