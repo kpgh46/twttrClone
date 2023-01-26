@@ -1,6 +1,7 @@
 import React from "react";
 import { useContext, useState, useEffect } from "react";
 import { authContext } from "../context/authContext";
+import { Link } from "react-router-dom";
 
 import { MdPersonAddAlt1 } from "react-icons/md";
 
@@ -72,8 +73,10 @@ const FollowUsers = () => {
 			{users &&
 				users.map((user) => (
 					<div className="fs-5 pt-1">
-						{user.username}
-						{"  "}
+						<Link to={`/profile/${user._id}`} state={users}>
+							{user.username}{" "}
+						</Link>
+
 						<MdPersonAddAlt1
 							className="pb-1"
 							onClick={() => clickFollow(user._id)}

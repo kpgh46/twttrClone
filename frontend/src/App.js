@@ -32,7 +32,10 @@ function App() {
 						}
 					></Route>
 					<Route path="/:id" element={<Comment />}></Route>
-					<Route path="/profile" element={<ProfilePage />}></Route>
+					<Route
+						path="/profile/:id"
+						element={<ProfilePage />}
+					></Route>
 					<Route
 						path="/signup"
 						element={
