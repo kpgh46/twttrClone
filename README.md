@@ -24,3 +24,8 @@ This application allows users to create an account with a unique username and pa
 -   Express
 -   React
 -   Node.js
+
+## New Features (In Progress)
+
+-   Profile Page
+-   Friend Management

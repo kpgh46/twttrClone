@@ -13,7 +13,8 @@ import { useContext } from "react";
 import Home from "./pages/Home";
 import SignUp from "./pages/SignUp";
 import LogIn from "./pages/LogIn";
-import CommentPage from "./components/CommentPage";
+import ProfilePage from "./pages/Profile";
+import Comment from "./components/Comment";
 // import { Router } from "express";
 
 function App() {
@@ -30,7 +31,8 @@ function App() {
 							loggedInUser ? <Home /> : <Navigate to="/login" />
 						}
 					></Route>
-					<Route path="/:id" element={<CommentPage />}></Route>
+					<Route path="/:id" element={<Comment />}></Route>
+					<Route path="/profile" element={<ProfilePage />}></Route>
 					<Route
 						path="/signup"
 						element={

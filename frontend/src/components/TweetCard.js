@@ -11,7 +11,7 @@ import { AiFillCloseCircle } from "react-icons/ai";
 import { BsPersonBoundingBox } from "react-icons/bs";
 import { MdKeyboardArrowDown } from "react-icons/md";
 
-import CommentPage from "./CommentPage";
+import CommentPage from "./Comment";
 
 const TweetCard = () => {
 	const { loggedInUser } = useContext(authContext);
