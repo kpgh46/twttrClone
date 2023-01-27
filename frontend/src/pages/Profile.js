@@ -3,6 +3,7 @@ import NavigationBar from "../components/Navbar";
 import { useLocation } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import Toast from "react-bootstrap/Toast";
+import Button from "react-bootstrap/Button";
 
 import { AiFillCloseCircle } from "react-icons/ai";
 import { BsPersonBoundingBox } from "react-icons/bs";
@@ -39,8 +40,8 @@ let ProfilePage = () => {
 						{!user[0].url ? (
 							<BsPersonBoundingBox
 								style={{
-									height: "30px",
-									width: "35px",
+									height: "165px",
+									width: "165px",
 									paddingRight: "9px",
 									color: "black",
 								}}
@@ -50,8 +51,8 @@ let ProfilePage = () => {
 								alt="profile image"
 								src={user[0].url}
 								style={{
-									height: "185px",
-									width: "185px",
+									height: "165px",
+									width: "165px",
 									marginRight: "7px",
 									borderRadius: "5px",
 									border: ".5px solid",
@@ -60,16 +61,29 @@ let ProfilePage = () => {
 						)}
 					</div>
 
-					<div className="d-flex align-items-start border col-6 mt-5 mb-5">
+					<div className="d-flex align-items-start  col-6 mt-5 mb-5">
 						<div className="row">
-							<div className="border">{user[0].username}</div>
-							<div className="border">
-								"This is my favorite quote that will be added to
-								the user model for this project!"
+							<h2>{user[0].username}</h2>
+							<div>
+								<em>
+									"This is my favorite quote that will be
+									added to the user model for this project!"
+								</em>
 							</div>
-							<div>Following: {following} </div>
-							<div>Followers: {followers}</div>
-							<button>FOLLOW</button>
+							<h6 className="mt-2">Following: {following} </h6>
+							<h6>Followers: {followers}</h6>
+							<Button
+								style={{
+									marginTop: "10px",
+									width: "95%",
+									backgroundColor: "rgb(66 103 178)",
+									color: "white",
+									border: "1px solid rgb(66 103 178)",
+									borderRadius: "5px",
+								}}
+							>
+								Follow
+							</Button>
 						</div>
 					</div>
 				</div>
