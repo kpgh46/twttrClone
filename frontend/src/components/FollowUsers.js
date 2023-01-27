@@ -34,7 +34,14 @@ const FollowUsers = () => {
 			{currentUsers &&
 				currentUsers.map((user) => (
 					<div className="fs-5 pt-1">
-						<Link to={`/profile/${user._id}`} state={currentUsers}>
+						<Link
+							to={`/profile/${user._id}`}
+							style={{
+								textDecoration: "none",
+								color: "rgb(66 103 178",
+							}}
+							state={currentUsers}
+						>
 							{user.username}{" "}
 						</Link>
 
