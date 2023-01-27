@@ -40,7 +40,6 @@ const FollowUsers = () => {
 								textDecoration: "none",
 								color: "rgb(66 103 178",
 							}}
-							state={currentUsers}
 						>
 							{user.username}{" "}
 						</Link>

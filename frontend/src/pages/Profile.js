@@ -2,19 +2,20 @@ import React from "react";
 import NavigationBar from "../components/Navbar";
 import { useLocation } from "react-router-dom";
 import { useParams } from "react-router-dom";
+import { authContext } from "../context/authContext";
 import Toast from "react-bootstrap/Toast";
 import Button from "react-bootstrap/Button";
+
+import { useContext } from "react";
 
 import { AiFillCloseCircle } from "react-icons/ai";
 import { BsPersonBoundingBox } from "react-icons/bs";
 import { MdKeyboardArrowDown } from "react-icons/md";
 
 let ProfilePage = () => {
-	const location = useLocation();
-	const users = location.state;
-	console.log(users);
+	const { currentUsers, setCurrentUsers } = useContext(authContext);
 	const { id } = useParams();
-	let user = users.filter((person) => person._id === id);
+	let user = currentUsers.filter((person) => person._id === id);
 	let following = user[0].follows.length;
 
 	let getFollowers = (objectArray, id) => {
@@ -29,7 +30,7 @@ let ProfilePage = () => {
 		return followsArray;
 	};
 
-	let followers = getFollowers(users, id);
+	let followers = getFollowers(currentUsers, id);
 
 	return (
 		<div className="row">
