@@ -48,10 +48,10 @@ const FollowUsers = () => {
 	}, [render]);
 
 	//when "Follow" button is clicked, user is added to logged in user list of follows
-	const clickFollow = async (username) => {
+	const clickFollow = async (_id) => {
 		let response = await fetch("api/addfollow", {
 			method: "PATCH",
-			body: JSON.stringify({ username }),
+			body: JSON.stringify({ _id }),
 			headers: {
 				Authorization: `Bearer ${loggedInUser.token}`,
 				"Content-Type": "application/json",
