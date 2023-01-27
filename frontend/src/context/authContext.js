@@ -24,9 +24,52 @@ const AuthContextProvider = (props) => {
 		}
 	}, []);
 
+	const findUnqiue = (arr1, arr2) => {
+		let empty = [];
+
+		arr2.forEach((item) => {
+			if (!arr1.includes(item._id)) {
+				empty.push(item);
+			}
+		});
+		return empty;
+	};
+
+	useEffect(() => {
+		let fetchAllUsers = async () => {
+			let response = await fetch("api/users", {
+				headers: {
+					Authorization: `Bearer ${loggedInUser.token}`,
+				},
+			});
+			const json = await response.json();
+			//filters out already followed users
+			if (response.ok) {
+				let loggedInFollows = loggedInUser.user.follows;
+				let allUsers = json.allUsers;
+				const unFollowedUsers = findUnqiue(loggedInFollows, allUsers);
+
+				const filteredUnfollowed = unFollowedUsers.filter(
+					(user) => user._id !== loggedInUser.user._id
+				);
+				console.log("useEffect ran");
+
+				setCurrentUsers(filteredUnfollowed);
+			}
+		};
+
+		fetchAllUsers();
+	}, [loggedInUser]);
+
 	return (
 		<authContext.Provider
-			value={{ loggedInUser, setLoggedInUser, setUser, removeUser }}
+			value={{
+				loggedInUser,
+				setLoggedInUser,
+				setUser,
+				removeUser,
+				currentUsers,
+			}}
 		>
 			{props.children}
 		</authContext.Provider>

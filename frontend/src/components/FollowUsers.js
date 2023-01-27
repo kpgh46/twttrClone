@@ -7,45 +7,8 @@ import { MdPersonAddAlt1 } from "react-icons/md";
 
 const FollowUsers = () => {
 	const { loggedInUser, setUser } = useContext(authContext);
-	const [users, setUsers] = useState(null);
-	const [render, setRender] = useState(false);
-
-	const findUnqiue = (arr1, arr2) => {
-		let empty = [];
-
-		arr2.forEach((item) => {
-			if (!arr1.includes(item._id)) {
-				empty.push(item);
-			}
-		});
-		return empty;
-	};
-
-	//fetches all users in database.
-	useEffect(() => {
-		let fetchAllUsers = async () => {
-			let response = await fetch("api/users", {
-				headers: {
-					Authorization: `Bearer ${loggedInUser.token}`,
-				},
-			});
-			const json = await response.json();
-			//filters out already followed users
-			if (response.ok) {
-				let loggedInFollows = loggedInUser.user.follows;
-				let allUsers = json.allUsers;
-				const unFollowedUsers = findUnqiue(loggedInFollows, allUsers);
-
-				const filteredUnfollowed = unFollowedUsers.filter(
-					(user) => user._id !== loggedInUser.user._id
-				);
-
-				setUsers(filteredUnfollowed);
-			}
-		};
-
-		fetchAllUsers();
-	}, [render]);
+	const { currentUsers, setCurrentUsers } = useContext(authContext);
+	// const [render, setRender] = useState(false);
 
 	//when "Follow" button is clicked, user is added to logged in user list of follows
 	const clickFollow = async (_id) => {
@@ -63,17 +26,15 @@ const FollowUsers = () => {
 			// console.log("this worked from ClickFOllow", json);
 			setUser(json);
 			localStorage.setItem("user", JSON.stringify(json));
-
-			setRender((prev) => !prev);
 		}
 	};
 
 	return (
 		<div>
-			{users &&
-				users.map((user) => (
+			{currentUsers &&
+				currentUsers.map((user) => (
 					<div className="fs-5 pt-1">
-						<Link to={`/profile/${user._id}`} state={users}>
+						<Link to={`/profile/${user._id}`} state={currentUsers}>
 							{user.username}{" "}
 						</Link>
 
