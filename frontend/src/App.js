@@ -32,7 +32,7 @@ function App() {
 						element={<ProfilePage />}
 					></Route>
 					<Route
-						path="/profilee/:id"
+						path="/userprofile/:id"
 						element={<UserProfile />}
 					></Route>
 					<Route

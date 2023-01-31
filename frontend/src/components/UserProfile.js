@@ -8,9 +8,9 @@ let UserProfile = () => {
 	const { currentUsers, setCurrentUsers } = useContext(authContext);
 	const { runRender } = useContext(authContext);
 
-	useEffect(() => {
-		runRender();
-	}, []);
+	// useEffect(() => {
+	// 	runRender();
+	// }, []);
 
 	console.log(currentUsers[0].username);
 

@@ -55,7 +55,9 @@ const NavigationBar = () => {
 					{loggedInUser && (
 						<div className="d-flex flex-row">
 							<div className="m-2">
-								<Link to={`/profilee/${loggedInUser.user._id}`}>
+								<Link
+									to={`/userprofile/${loggedInUser.user._id}`}
+								>
 									{loggedInUser.user.username}
 								</Link>
 							</div>
