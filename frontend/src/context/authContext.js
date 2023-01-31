@@ -6,6 +6,7 @@ export const authContext = createContext();
 const AuthContextProvider = (props) => {
 	const [loggedInUser, setLoggedInUser] = useState(null);
 	const [currentUsers, setCurrentUsers] = useState([]);
+	const [render, setRender] = useState(false);
 
 	const setUser = (user) => {
 		setLoggedInUser(user);
@@ -35,6 +36,10 @@ const AuthContextProvider = (props) => {
 		return empty;
 	};
 
+	const runRender = () => {
+		setRender(!render);
+	};
+
 	useEffect(() => {
 		let fetchAllUsers = async () => {
 			let response = await fetch("api/users", {
@@ -59,7 +64,7 @@ const AuthContextProvider = (props) => {
 		};
 
 		fetchAllUsers();
-	}, [loggedInUser]);
+	}, [render]);
 
 	return (
 		<authContext.Provider
@@ -69,6 +74,7 @@ const AuthContextProvider = (props) => {
 				setUser,
 				removeUser,
 				currentUsers,
+				runRender,
 			}}
 		>
 			{props.children}

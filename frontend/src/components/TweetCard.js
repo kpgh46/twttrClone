@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import Toast from "react-bootstrap/Toast";
 import { useContext, useEffect } from "react";
@@ -15,7 +15,7 @@ import CommentPage from "./Comment";
 
 const TweetCard = () => {
 	const { loggedInUser } = useContext(authContext);
-	const { tweets, setTweets, getTweets, comments } = useContext(TweetContext);
+	const { tweets, getTweets, comments } = useContext(TweetContext);
 
 	useEffect(() => {
 		if (loggedInUser) {

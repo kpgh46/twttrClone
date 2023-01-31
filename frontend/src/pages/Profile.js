@@ -1,6 +1,5 @@
 import React from "react";
 import NavigationBar from "../components/Navbar";
-import { useLocation } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { authContext } from "../context/authContext";
 import Toast from "react-bootstrap/Toast";
@@ -8,13 +7,12 @@ import Button from "react-bootstrap/Button";
 
 import { useContext } from "react";
 
-import { AiFillCloseCircle } from "react-icons/ai";
 import { BsPersonBoundingBox } from "react-icons/bs";
-import { MdKeyboardArrowDown } from "react-icons/md";
 
 let ProfilePage = () => {
-	const { currentUsers, setCurrentUsers } = useContext(authContext);
+	const { currentUsers } = useContext(authContext);
 	const { id } = useParams();
+	console.log(id);
 	let user = currentUsers.filter((person) => person._id === id);
 	let following = user[0].follows.length;
 

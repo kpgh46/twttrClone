@@ -1,11 +1,5 @@
 import "./App.css";
-import {
-	BrowserRouter,
-	Routes,
-	Route,
-	Navigate,
-	Router,
-} from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 import { authContext } from "./context/authContext";
 import { useContext } from "react";
@@ -15,6 +9,7 @@ import SignUp from "./pages/SignUp";
 import LogIn from "./pages/LogIn";
 import ProfilePage from "./pages/Profile";
 import Comment from "./components/Comment";
+import UserProfile from "./components/UserProfile";
 // import { Router } from "express";
 
 function App() {
@@ -35,6 +30,10 @@ function App() {
 					<Route
 						path="/profile/:id"
 						element={<ProfilePage />}
+					></Route>
+					<Route
+						path="/profilee/:id"
+						element={<UserProfile />}
 					></Route>
 					<Route
 						path="/signup"

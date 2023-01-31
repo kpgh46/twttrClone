@@ -1,5 +1,5 @@
 import React from "react";
-import { useContext, useState, useEffect } from "react";
+import { useContext } from "react";
 import { authContext } from "../context/authContext";
 import { Link } from "react-router-dom";
 
@@ -7,7 +7,7 @@ import { MdPersonAddAlt1 } from "react-icons/md";
 
 const FollowUsers = () => {
 	const { loggedInUser, setUser } = useContext(authContext);
-	const { currentUsers, setCurrentUsers } = useContext(authContext);
+	const { currentUsers } = useContext(authContext);
 	// const [render, setRender] = useState(false);
 
 	//when "Follow" button is clicked, user is added to logged in user list of follows
