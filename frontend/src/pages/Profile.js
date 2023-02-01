@@ -1,6 +1,6 @@
 import React from "react";
 import NavigationBar from "../components/Navbar";
-import { useParams } from "react-router-dom";
+import { json, useParams } from "react-router-dom";
 import { authContext } from "../context/authContext";
 import Toast from "react-bootstrap/Toast";
 import Button from "react-bootstrap/Button";
@@ -11,10 +11,31 @@ import { BsPersonBoundingBox } from "react-icons/bs";
 
 let ProfilePage = () => {
 	const { currentUsers } = useContext(authContext);
+	const { loggedInUser, setUser } = useContext(authContext);
 	const { id } = useParams();
+
 	console.log(id);
 	let user = currentUsers.filter((person) => person._id === id);
 	let following = user[0].follows.length;
+
+	//when "Follow" button is clicked, user is added to logged in user list of follows
+	const clickFollow = async (_id) => {
+		let response = await fetch("api/addfollow", {
+			method: "PATCH",
+			body: JSON.stringify({ _id }),
+			headers: {
+				Authorization: `Bearer ${loggedInUser.token}`,
+				"Content-Type": "application/json",
+			},
+		});
+		const json = await response.json();
+
+		if (response.ok) {
+			// console.log("this worked from ClickFOllow", json);
+			setUser(json);
+			localStorage.setItem("user", JSON.stringify(json));
+		}
+	};
 
 	let getFollowers = (objectArray, id) => {
 		let followsArray = 0;
@@ -47,7 +68,7 @@ let ProfilePage = () => {
 							/>
 						) : (
 							<img
-								alt="profile image"
+								alt="profile"
 								src={user[0].url}
 								style={{
 									height: "165px",
@@ -80,6 +101,7 @@ let ProfilePage = () => {
 									border: "1px solid rgb(66 103 178)",
 									borderRadius: "5px",
 								}}
+								onClick={() => clickFollow(user[0]._id)}
 							>
 								Follow
 							</Button>

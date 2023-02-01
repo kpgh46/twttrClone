@@ -1,14 +1,15 @@
 import React from "react";
 import { useContext } from "react";
 import { authContext } from "../context/authContext";
+import { TweetContext } from "../context/tweetContext";
 import { Link } from "react-router-dom";
 
 import { MdPersonAddAlt1 } from "react-icons/md";
 
 const FollowUsers = () => {
-	const { loggedInUser, setUser } = useContext(authContext);
+	const { loggedInUser, setUser, runRender } = useContext(authContext);
+	const { getTweets } = useContext(TweetContext);
 	const { currentUsers } = useContext(authContext);
-	// const [render, setRender] = useState(false);
 
 	//when "Follow" button is clicked, user is added to logged in user list of follows
 	const clickFollow = async (_id) => {
@@ -26,6 +27,8 @@ const FollowUsers = () => {
 			// console.log("this worked from ClickFOllow", json);
 			setUser(json);
 			localStorage.setItem("user", JSON.stringify(json));
+			runRender();
+			getTweets(loggedInUser.token);
 		}
 	};
 

@@ -21,7 +21,7 @@ const TweetCard = () => {
 		if (loggedInUser) {
 			getTweets(loggedInUser.token);
 		}
-	}, [tweets]);
+	}, []);
 
 	const addLike = async (_id) => {
 		let response = await fetch("api/addlike", {
@@ -32,6 +32,12 @@ const TweetCard = () => {
 				"Content-Type": "application/json",
 			},
 		});
+
+		let json = response.json();
+
+		if (!response.ok) {
+			console.log(json.error);
+		}
 	};
 
 	const deleteTweet = async (_id) => {
@@ -43,6 +49,12 @@ const TweetCard = () => {
 				"Content-Type": "application/json",
 			},
 		});
+
+		let json = response.json();
+
+		if (!response.ok) {
+			console.log(json.error);
+		}
 	};
 	return (
 		<div>
@@ -65,7 +77,7 @@ const TweetCard = () => {
 									/>
 								) : (
 									<img
-										alt="profile image"
+										alt="profile"
 										src={tweet.author.url}
 										style={{
 											height: "35px",
